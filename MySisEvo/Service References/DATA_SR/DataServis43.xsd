@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://mysismobile.com/DataServis.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" />
+  <xs:import schemaLocation="http://mysismobile.com/DataServis.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="getData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="serino" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="getDataResult" nillable="true" type="q1:Datas" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDatas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="serinolar" nillable="true" type="q2:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDatasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="getDatasResult" nillable="true" type="q3:ArrayOfDatas" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDataList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="serino" type="xs:int" />
+        <xs:element minOccurs="0" name="basTar" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="bitTar" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDataListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="getDataListResult" nillable="true" type="q4:ArrayOfDatas" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAlarmlar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kul" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAlarmlarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="getAlarmlarResult" nillable="true" type="q5:ArrayOfAlarmlar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setAlarmTanim">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Serinolar" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="AlarmTan" nillable="true" type="q6:AlarmT" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setAlarmTanimResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAraclar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kulAd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAraclarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="getAraclarResult" nillable="true" type="q7:ArrayOfAraclar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateArac">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="arac" nillable="true" type="q8:Araclar" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateAracResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getKullanici">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kulAd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="kulSifre" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getKullaniciResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" minOccurs="0" name="getKullaniciResult" nillable="true" type="q9:Kullanici" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

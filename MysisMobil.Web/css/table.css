@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container { width:650px; margin:0px auto; }
+#table { width:650px;}
+
+
+/* ------------------- Pricing Table styling starts from here ------------------- */
+
+/* >> The Magnificent CLEARFIX << */
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; *zoom:1;}
+* html .clearfix { height: 1%; } /* Hides from IE-mac \*/
+.clearfix { display: block; }
+
+.vlists:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.vlists { display: inline-block; *zoom:1;}
+* html .vlists { height: 1%; } /* Hides from IE-mac \*/
+.vlists { display: block; }
+
+/* ---------------------------- Parent styling and basic styling ----------------------------- */
+
+.vTables { font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:1.6; padding:7px; color:#868686;  }
+
+.vTables ul { list-style:none;  } 
+.vTables a { color:#63cbf7; text-decoration:none; }
+.vTables a:hover { text-decoration:underline; }
+.vTables h3 { margin:0; padding:5px 2px; border-bottom:1px solid #eaeaef; }
+.white-border { border-top:1px solid #fff; }
+
+/* ---------------------------- Container styling  ----------------------------- */
+
+.vTables .vholder {text-shadow:1px 1px 0px #fff; padding:10px; margin:0; }
+.vTables .vholder ul li div { float:left; }
+.vTables .vholder ul li div { width:48%; margin:0; padding:0; }
+.vTables .vholder ul li div.imageholder { margin:0; padding:0;} 
+.vTables .vholder ul li div.imageholder img { display:block; margin:0; padding:0; }
+
+/* ---------------------------- Slideshow styling  ----------------------------- */
+.vTables .slideshow ul , .vTables .slideshow ul li { margin:0; padding:0;}
+.vTables .vholder ul.slideshow { display:block; position:relative;   }
+.vTables .vholder ul.slideshow li { visibility:hidden; position:absolute; display:block; width:95%;  }
+.vTables .vholder ul.slideshow li h2 { border-bottom:1px solid #eeeeee; padding-bottom:8px; }
+ 
+/* ---------------------------- Pricing plans styling ----------------------------- */
+
+.vTables .vlists {margin-left:100px;}
+.vTables .vlists ul{ background:url(i/col-odd-bg.jpg) repeat-x #f1f3f3; float:left; display:block;   border-top:1px solid #fff; padding:0px 5px 0px 5px!important; border-left:1px solid #fff;border-right:1px solid #e5e5e4; margin:0; padding:0; position:relative;  }
+.vTables .vlists ul:hover {  z-index:10; -moz-box-shadow:0px 0px 9px #3592c2; -webkit-box-shadow:0px 0px 9px #3592c2; box-shadow:0px 0px 9px #3592c2; }
+.vTables .vlists ul.even {  background:url(i/col-even-bg.jpg) repeat-x #f8f8f8!important;  }
+.vTables .vlists ul li h2{text-align:center;}
+.vTables .vlists ul li { text-align:center; padding:10px 2px; display:block; border-bottom:1px solid #eeeeee; border-top:1px solid #ffffff; text-shadow:1px 1px 0px #ffffff; font-size:16px; position:relative;zoom:1; margin-left:5px; }
+
+/* ---------------------------- Sign Up button styling ----------------------------- */
+
+.vTables .vlists .signup a  { background:url(i/button-bg.jpg) top left; color:#fff; text-shadow:none; font-size:19px; font-weight:bold; 
+padding:8px 3px 8px 3px; width:125px; display:block; text-align:center; border:1px solid #4599c0; border-left:none;border-top:none; 
+border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; -moz-box-shadow:1px 1px 3px #bbb; -webkit-box-shadow:1px 1px 3px #bbb; box-shadow:1px 1px 3px #bbb; margin:2px auto; }
+.vTables .vlists .signup a:hover { -webkit-box-shadow:0px 0px 6px #73d1f7; -moz-box-shadow:0px 0px 6px #73d1f7; box-shadow:0px 0px 4px #73d1f7; }
+*.vTables .vlists .signup a { padding:5px 3px 5px 3px; }
+.vTables .vlists a:hover { text-decoration:none; }
+.vTables .signup { border-top:none!important; }
+*.vTables .signup { margin-bottom:-2px!important; }
+
+/* ---------------------------- planname  styling ----------------------------- */
+
+.vTables .planname { border-bottom:1px dashed #e2dddd!important;   }
+.vTables .planname h2 { font-size:28px; margin:1px; padding:7px 0px; color:#898989; }
+
+/* ---------------------------- featured column styling ----------------------------- */
+
+.vTables .featured li h2 { color:#585858!important;}
+.vTables .featured .signup a  { background:url(i/featured-button-bg.jpg) top left;border:1px solid #a70023; border-left:none;border-top:none;   }
+.vTables .featured .signup a:hover { -webkit-box-shadow:0px 0px 6px #e2627d; -moz-box-shadow:0px 0px 6px #e2627d; -webkit-box-shadow:0px 0px 4px #a70023; }
+
+.vTables .featured:hover {  z-index:10; -moz-box-shadow:0px 0px 9px #da0404!important; -webkit-box-shadow:0px 0px 9px #da0404!important; box-shadow:0px 0px 9px #da0404!important; }
+
+/* ---------------------------- Fallback styling IE offcourse ----------------------------- */
+
+.fallback-border-default { border:1px solid #73d1f7!important; }
+.fallback-border-featured { border:1px solid #da0404!important; }
+
+/* ---------------------------- AutoDetection column width >> DO NOT CHANGE << ----------------------------- */
+
+.cols24x .vlists ul {  width:200px; }
+.cols34x .vlists ul {  width:200px; }
+.cols44x .vlists ul {  width:200px;  }
+.cols54x .vlists ul {  width:200px; }
+
+.cols23x .vlists ul {  width:200px; }
+.cols33x .vlists ul {  width:200px;  }
+.cols43x .vlists ul {  width:200px;  }
+.cols53x .vlists ul {  width:200px; }
+
+.cols22x .vlists ul {  width:200px;  }
+.cols32x .vlists ul {  width:200px; }
+.cols42x .vlists ul {  width:200px;  }
+.cols52x .vlists ul {  width:200px;  }

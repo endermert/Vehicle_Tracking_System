@@ -1,0 +1,1463 @@
+﻿<navigation:Page x:Class="MySisEvo.Views.MapPage" 
+                 xmlns:data="clr-namespace:MySisEvo.Classes" 
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                 mc:Ignorable="d"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+                 xmlns:toolKitControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
+                 d:DesignWidth="1000" d:DesignHeight="1000" Title="Harita | MysisMobil Arac Takip Sistemleri"
+                 Style="{StaticResource PageStyle}" SizeChanged="SizeChanged1" Loaded="Page_Loaded"> 
+    
+    <UserControl.Resources>
+        <Style x:Key="defaultLineStyle" TargetType="telerik:MapShape">
+            <Setter Property="StrokeThickness" Value="5" />
+            <Setter Property="Stroke" Value="Transparent" />
+        </Style>
+        <Style x:Key="selectedLineStyle" TargetType="telerik:MapShape">
+            <Setter Property="StrokeThickness" Value="5" />
+            <Setter Property="Stroke" Value="Green" />
+        </Style>
+        <Style x:Key="defaultPolylineStyle" TargetType="telerik:MapShape">
+            <Setter Property="StrokeThickness" Value="15" />
+            <Setter Property="Stroke" Value="Blue" />
+            <Setter Property="Opacity" Value="0.3"/>
+        </Style>
+        <Style x:Key="mavi" TargetType="telerik:MapShape">
+            <Setter Property="StrokeThickness" Value="5" />
+            <Setter Property="Stroke" Value="Blue" />
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        
+        <Style x:Key="yesil" TargetType="telerik:MapShape">
+            <Setter Property="StrokeThickness" Value="5" />
+            <Setter Property="Stroke" Value="Red" />
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        <Style x:Key="selectedPolylineStyle" TargetType="telerik:MapShape">
+            <Setter Property="StrokeThickness" Value="15" />
+            <Setter Property="Stroke" Value="Red" />
+        </Style>
+        <data:Entities x:Key="EntityObject" />
+        <Storyboard x:Name="myStoryboard">
+            <DoubleAnimation  x:Name="myDoubleAni"
+            Storyboard.TargetProperty="Opacity"
+            From="1.0" To="0.0" Duration="0:0:0.5" 
+            AutoReverse="True" RepeatBehavior="Forever" />
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot"  DataContext="{Binding Source={StaticResource EntityObject}}">
+            <StackPanel x:Name="ContentStackPanel" >
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="50" HorizontalAlignment="Right">
+                    <telerik:RadButton Margin="2" Height="35" Width="110" Click="btnHome_click" >
+                        <telerik:RadButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/MySisEvo;component/Images/home.png" Height="30" Width="30" />
+                            <TextBlock Text="ANASAYFA" Foreground="Navy" Margin="5,7,0,0" />
+                        </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Anasayfa"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="80" Name="btnList" Click="btnList_Click">
+                        <telerik:RadButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/MySisEvo;component/Images/list.png" Height="30" Width="30" />
+                                <TextBlock Text="LİSTE" Foreground="Navy" Margin="5,7,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Araç Listesi"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="100" Name="btnDetaylar" Click="btnDetaylar_Click">
+                        <telerik:RadButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/MySisEvo;component/Images/info.png" Height="30" Width="30" />
+                                <TextBlock Text="DETAYLAR" Foreground="Navy" Margin="5,7,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Araç Detayları"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="140" Click="btnSonKonum_Click">
+                        <telerik:RadButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/MySisEvo;component/Images/pin_blue.png" Height="30" Width="30" />
+                                <TextBlock Text="SON KONUMLAR" Foreground="Navy" Margin="5,7,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Son Konumlar"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="90" Click="btnGecmis_Click">
+                        <telerik:RadButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/MySisEvo;component/Images/arrow_undo.png" Height="30" Width="30" />
+                                <TextBlock Text="GEÇMİŞ" Foreground="Navy" Margin="5,7,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Geçmişi İzle"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                <telerik:RadButton Name="btnTanimlar" Margin="2" Height="35" Width="100" Click="btnTanimlar_Click" Visibility="Collapsed">
+                    <telerik:RadButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/MySisEvo;component/Images/map_edit.png" Height="30" Width="30" />
+                            <TextBlock Text="TANIMLAR" Foreground="Navy" Margin="5,7,0,0" />
+                        </StackPanel>
+                    </telerik:RadButton.Content>
+                    <ToolTipService.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Rota-Bölge-Nokta Tanımla"/>
+                        </ToolTip>
+                    </ToolTipService.ToolTip>
+                </telerik:RadButton>
+                <telerik:RadButton Name="btnAlarm" Margin="2" Height="35" Width="112" Click="btnAlarm_Click" Visibility="Visible" >
+                    <telerik:RadButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/MySisEvo;component/Images/clock_green.png" Height="30" Width="30" />
+                            <TextBlock Text="ALARMLAR" Foreground="Navy" Margin="5,7,0,0" />
+                        </StackPanel>
+                    </telerik:RadButton.Content>
+                    <ToolTipService.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Alarmlar ve Tanımlama"/>
+                        </ToolTip>
+                    </ToolTipService.ToolTip>
+                </telerik:RadButton>
+                <!--<telerik:RadButton Margin="2" Height="35" Width="35" Click="btnAdrsArama_Click">
+                        <telerik:RadButton.Content>
+                            <Image Source="/MySisEvo;component/Images/magnify.png" Height="30" Width="30" />
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Adres Arama"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="35" Click="btnYol_Click">
+                        <telerik:RadButton.Content>
+                            <Image Source="/MySisEvo;component/Images/Flag.png" Height="30" Width="30" />
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Rota/Güzergah"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="35">
+                        <telerik:RadButton.Content>
+                            <Image Source="/MySisEvo;component/Images/users.png" Height="30" Width="30" />
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Kullanıcı"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Height="35" Width="35">
+                        <telerik:RadButton.Content>
+                            <Image Source="/MySisEvo;component/Images/settings_add.png" Height="30" Width="30" />
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Ayarlar"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>-->
+                    <telerik:RadButton Margin="2" Name="btnTamEkran1" Height="35" Width="35" Click="BtnTamEkran_Click">
+                        <telerik:RadButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/MySisEvo;component/Images/arrow_maximize.png" Height="30" Width="30" />
+                                <TextBlock Text="" Foreground="Navy" Margin="5,7,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Tam Ekran"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Margin="2" Name="btnTamEkran2" Visibility="Collapsed" Height="35" Width="35" Click="BtnTamEkran_Click">
+                        <telerik:RadButton.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/MySisEvo;component/Images/arrow_minimize.png" Height="30" Width="30" />
+                                <TextBlock Text="" Foreground="Navy" Margin="5,7,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Tam Ekrandan Çık"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+                    <telerik:RadButton Name="btnClose"  Margin="2" Height="35" Width="35" Click="btnClose_Click">
+                        <telerik:RadButton.Content>
+                            <Image Source="/MySisEvo;component/Images/deny.png" Height="30" Width="30" />
+                        </telerik:RadButton.Content>
+                        <ToolTipService.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="Kapat"/>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+                    </telerik:RadButton>
+            </StackPanel>
+            <StackPanel>
+                <telerik:RadDocking Name="RadDockAna" Margin="0,-5,0,0" MaxHeight="2048" >
+            <telerik:RadDocking.DocumentHost>
+                <telerik:RadSplitContainer>
+                    <telerik:RadPaneGroup>
+                        <telerik:RadPane Name="PaneMap" Header="Harita" >
+                                    <telerik:RadMap x:Name="RadMap1"  ZoomLevel="7" MinZoomLevel="5" MaxZoomLevel="18" MouseEnter="PaneMap_MouseEnter" MouseLeave="PaneMap_MouseLeave" >
+                                            <telerik:InformationLayer Name="layerDetayIn">
+                                                <telerik:InformationLayer.ItemTemplate>
+                                                    <DataTemplate >
+                                                        <Canvas Width="40" Height="20">
+
+                                                            <telerik:MapLayer.HotSpot>
+                                                                <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                            </telerik:MapLayer.HotSpot>
+
+                                                            <Canvas x:Name="Pin" Margin="-10,-28,0,0" Height="32" Width="20" HorizontalAlignment="Center">
+                                                                <Image Height="32" Width="20" Stretch="Fill" Source="/MySisEvo;component/Images/bullet_pin_green.png" />
+                                                                <Canvas Height="50" Margin="-20,-30,0,0" Width="60">
+                                                                    <Image Margin="10,25,0,0" Stretch="Fill" Cursor="Hand" Source="{Binding Path=AracIcon}" />
+                                                                </Canvas>
+                                                            </Canvas>
+                                                            <Grid DataContext="{Binding Source={StaticResource EntityObject}}" 
+                                                                  Margin="-200,-210,0,0" Background="Transparent">
+                                                                <Canvas>
+
+                                                                    <Rectangle Fill="White" Opacity="0.5" 
+                                                                           Width="400" Height="200"
+                                                                           RadiusX="10" RadiusY="10">
+                                                                    </Rectangle>
+
+
+                                                                    <!-- main rect -->
+                                                                    <Rectangle Width="400" Height="200"  RadiusX="10" RadiusY="10"
+                                                                           Opacity="0.5">
+                                                                        <Rectangle.Fill>
+                                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                                                <GradientStop Offset="0" Color="DarkOliveGreen"/>
+                                                                                <GradientStop Offset="1" Color="DarkOliveGreen"/>
+                                                                            </LinearGradientBrush>
+                                                                        </Rectangle.Fill>
+                                                                    </Rectangle>
+
+                                                                    <!-- transparent rect -->
+                                                                    <Rectangle Width="398" Height="198" RadiusX="10" RadiusY="10">
+                                                                        <Rectangle.Fill>
+                                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                                                <GradientStop Offset="0" Color="DarkOliveGreen"/>
+                                                                                <GradientStop Offset="1" Color="#00000000"/>
+                                                                            </LinearGradientBrush>
+                                                                        </Rectangle.Fill>
+                                                                    </Rectangle>
+                                                                    <telerik:RadGauge x:Name="radGauge"
+                                                                          Margin="300,0,0,0" 
+                                                                          Height="200" 
+                                                                          Width="200">
+                                                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                            <telerik:RadialGauge>
+                                                                                <telerik:RadialScale x:Name="radialScale" Min="0" Max="220" MajorTicks="10"
+							                                                            MiddleTicks="1">
+
+                                                                                    <telerik:RadialScale.MajorTick>
+                                                                                        <telerik:MajorTickProperties />
+                                                                                    </telerik:RadialScale.MajorTick>
+                                                                                    <telerik:RadialScale.MiddleTick>
+                                                                                        <telerik:MiddleTickProperties Length="0.07" />
+                                                                                    </telerik:RadialScale.MiddleTick>
+                                                                                    <telerik:RadialScale.MinorTick>
+                                                                                        <telerik:MinorTickProperties Length="0.05" />
+                                                                                    </telerik:RadialScale.MinorTick>
+
+                                                                                    <telerik:RadialScale.Label>
+                                                                                        <telerik:LabelProperties FontSize="10" />
+                                                                                    </telerik:RadialScale.Label>
+
+                                                                                    <telerik:IndicatorList>
+                                                                                        <telerik:RadialBar x:Name="gauge1_radialBar" IsAnimated="True" Value="{Binding Path=Data.DT_H1Z}" />
+
+                                                                                        <telerik:Needle x:Name="gauge1_needle" IsAnimated="true" Value="{Binding Path=Data.DT_H1Z}" />
+                                                                                    </telerik:IndicatorList>
+                                                                                </telerik:RadialScale>
+                                                                            </telerik:RadialGauge>
+                                                                            <Grid>
+                                                                                <Grid.RowDefinitions>
+                                                                                    <RowDefinition Height="0.60*" />
+                                                                                    <RowDefinition Height="0.40*" />
+                                                                                </Grid.RowDefinitions>
+
+                                                                                <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"
+							                                                    Foreground="GhostWhite" FontFamily="CourierNew">HIZ</TextBlock>
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                    </telerik:RadGauge>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Border BorderThickness="2" CornerRadius="5" Margin="5" BorderBrush="White">
+                                                                    <StackPanel Orientation="Vertical" Margin="5" >
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="KONTAK"  Foreground="White" Width="50"/>
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Data.DT_KONTAK}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal" >
+                                                                            <TextBlock Text="ENLEM"  Foreground="White" Width="50"/>
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Data.DT_ENLEM}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal" >
+                                                                            <TextBlock Text="BOYLAM" Foreground="White" Width="50" />
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Data.DT_BOYLAM}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal" >
+                                                                            <TextBlock Text="HIZ" Foreground="White" Width="50" />
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Data.DT_H1Z}" Foreground="White" />
+                                                                            <TextBlock Text=" KM/H"  Foreground="White"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="SERİ NO" Foreground="White" Width="50" />
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_SERINO}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="PLAKA"  Foreground="White" Width="50"/>
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_PLAKA}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="TEL"  Foreground="White" Width="50"/>
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_TEL}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="MARKA" Foreground="White" Width="50" />
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_MARKA}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="MODEL" Foreground="White" Width="50" />
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_MODEL}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="RENK"  Foreground="White" Width="50"/>
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_RENK}" Foreground="White" />
+                                                                        </StackPanel>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="SAHIBI"  Foreground="White" Width="50"/>
+                                                                            <TextBlock Text=" = "  Foreground="White"/>
+                                                                            <TextBlock Text="{Binding Path=Arac.ARC_SAHIBI}" Foreground="White"/>
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                    <Border BorderThickness="2" CornerRadius="5" Margin="5" BorderBrush="White">
+                                                                        <StackPanel Orientation="Vertical">
+                                                                            <Image Width="120" Stretch="Uniform" Margin="5" Source="{Binding Path=Arac.ARC_RES1M}">
+                                                                                <Image.Effect>
+                                                                                    <DropShadowEffect Color="Black" Direction="315" Opacity="0.8" ShadowDepth="7"/>
+                                                                                </Image.Effect>
+                                                                            </Image>
+                                                                            <telerik:RadButton Margin="2" Height="35" Width="90" Click="btnGecmisKisa_Click">
+                                                                                <telerik:RadButton.Content>
+                                                                                    <StackPanel Orientation="Horizontal">
+                                                                                        <Image Source="/MySisEvo;component/Images/arrow_undo.png" Height="30" Width="30" />
+                                                                                        <TextBlock Text="iZLE" Foreground="Navy" Margin="5,7,0,0" />
+                                                                                    </StackPanel>
+                                                                                </telerik:RadButton.Content>
+                                                                            </telerik:RadButton>
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </Canvas>
+
+                                                            </Grid>
+
+
+                                                        </Canvas>
+                                                    </DataTemplate>
+                                                </telerik:InformationLayer.ItemTemplate>
+                                            </telerik:InformationLayer>
+
+                                            <telerik:InformationLayer Name="layerDetayOut">
+                                            <telerik:InformationLayer.ItemTemplate>
+                                                <DataTemplate >
+                                                    <Canvas>
+
+                                                        <telerik:MapLayer.HotSpot>
+                                                            <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                        </telerik:MapLayer.HotSpot>
+
+
+                                                        <Canvas x:Name="Pin" Margin="-10,-28,0,0" Height="32" Width="20" HorizontalAlignment="Center">
+                                                            <Image Height="32" Width="20" Stretch="Fill" Source="/MySisEvo;component/Images/bullet_pin_red.png" />
+                                                            <Canvas Height="50" Margin="-20,-30,0,0" Width="60">
+                                                                <Image Margin="10,25,0,0" Stretch="Fill" Cursor="Hand" Source="{Binding Path=AracIcon}" />
+                                                            </Canvas>
+                                                            
+                                                        </Canvas>
+
+                                                    </Canvas>
+                                                </DataTemplate>
+                                            </telerik:InformationLayer.ItemTemplate>
+
+                                        </telerik:InformationLayer>
+
+
+                                        </telerik:RadMap>
+                        </telerik:RadPane>
+                        <telerik:RadPane Name="PaneGeo" Header="GEO" Visibility="Collapsed">
+                            <Grid HorizontalAlignment="Center">
+                                <!--<telerik:RadMap x:Name="RadGeoMap"  ZoomLevel="7" MinZoomLevel="5" MaxZoomLevel="18">
+                                </telerik:RadMap>-->
+                            </Grid>
+                        </telerik:RadPane>
+                        <telerik:RadPane Name="PaneSonKonum" Header="Son Konumlar" Visibility="Collapsed">
+                            <Grid HorizontalAlignment="Center">
+                                <telerik:RadGridView Name="sonKonumGrid" AutoGenerateColumns="False"
+                                    CanUserFreezeColumns="False"
+                                    RowIndicatorVisibility="Collapsed" Foreground="Navy"
+                                    ShowGroupPanel="False" ItemsSource="{Binding Path=AracDataList}">
+                                        <telerik:RadGridView.Columns>
+                                        <telerik:GridViewDataColumn Header="DURUM" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <!--<TextBlock Margin="2" Text="{Binding Path=Arac.ARC_SERINO}" Foreground="Navy" />-->
+                                                    <Grid>
+                                                        <Image Grid.Column="1" Source="/MySisEvo;component/Images/Loff.png"  Height="25" Width="25" >
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Baglantı Yok"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <Image Visibility="{Binding Path=Arac.ARC_KOPMA}" Grid.Column="1" Source="/MySisEvo;component/Images/Lon.png"  Height="25" Width="25" >
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Baglantı Var"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="PLAKA" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Arac.ARC_PLAKA}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="MARKA" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Arac.ARC_MARKA}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="MODEL" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Arac.ARC_MODEL}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="ENLEM" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Data.DT_ENLEM}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="BOYLAM" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Data.DT_BOYLAM}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="HIZ" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Data.DT_H1Z}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                            
+                                        <telerik:GridViewDataColumn Header="KONTAK" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Data.DT_KONTAK}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+
+                                        <telerik:GridViewDataColumn Header="CAD./SOK." ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Adres.ADR_CAD}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+
+                                        <telerik:GridViewDataColumn Header="SEMT/MAH." ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Adres.ADR_SEMT}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                                    
+                                        <telerik:GridViewDataColumn Header="iL" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Adres.ADR_IL}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                                    
+                                        <telerik:GridViewDataColumn Header="ULKE" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Adres.ADR_ULKE}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+
+                                        <telerik:GridViewDataColumn Header="TARiH SAAT" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Margin="2" Text="{Binding Data.DT_TAR1H}" Foreground="Navy" />
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+                                        <telerik:GridViewDataColumn Header="HARiTA" ShowDistinctFilters="False">
+                                            <telerik:GridViewDataColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image Source="/MySisEvo;component/Images/pin_green.png"  Height="25" Width="25" Tag="{Binding Path=Arac.ARC_SERINO}" MouseLeftButtonDown="ImagePin_Click"  />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </telerik:GridViewDataColumn.CellTemplate>
+                                        </telerik:GridViewDataColumn>
+
+                                    </telerik:RadGridView.Columns>
+                                    </telerik:RadGridView>
+                            </Grid>
+                        </telerik:RadPane>
+                        <telerik:RadPane Name="PaneAnime" Header="Geçmiş" Visibility="Collapsed" Loaded="PaneAnime_Loaded" >
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                                        <telerik:RadMap x:Name="RadAniMap"  ZoomLevel="7" MinZoomLevel="5" MaxZoomLevel="18" MouseClickMode="None"  MapMouseClick="RadAniMap_Click" MouseEnter="RadAniMap_MouseEnter" MouseLeave="RadAniMap_MouseLeave" >
+                                            <telerik:InformationLayer Name="layerRota"></telerik:InformationLayer>
+                                            <telerik:InformationLayer Name="layerYol"></telerik:InformationLayer>
+                                            <telerik:InformationLayer Name="layerHamYol"></telerik:InformationLayer>
+                                            <telerik:InformationLayer Name="layerCalYol"></telerik:InformationLayer>
+                                        <telerik:InformationLayer Name="layerKare">
+                                                <DataTemplate>
+                                                    <Border Background="Transparent"
+								                        BorderThickness="1" 
+								                        Padding="2,2,2,2">
+                                                        <telerik:MapLayer.HotSpot>
+                                                            <telerik:HotSpot X="0.5" Y="1.0"  XUnits="Fraction" YUnits="Fraction" ElementName="Pin"/>
+                                                        </telerik:MapLayer.HotSpot>
+                                                        <Canvas x:Name="Pin" Margin="-10,-28,0,0" Height="32" Width="20" HorizontalAlignment="Center">
+                                                            <Image Height="32" Width="20" Stretch="Fill" Source="/MySisEvo;component/Images/bullet_pin_red.png" />
+                                                            <Canvas Height="50" Margin="-20,-30,0,0" Width="60">
+                                                                <Image Margin="10,25,0,0" Stretch="Fill" Cursor="Hand" Source="/MySisEvo;component/Images/Cars/camaro_65x27.png" />
+                                                            </Canvas>
+
+                                                        </Canvas>
+
+                                                    </Border>
+                                                </DataTemplate>
+
+                                            </telerik:InformationLayer>
+                                    
+                                        <telerik:InformationLayer Name="layerArac">
+                                        <telerik:InformationLayer.ItemTemplate>
+                                                    <DataTemplate >
+                                                        <Canvas>
+
+                                                            <telerik:MapLayer.HotSpot>
+                                                                <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                            </telerik:MapLayer.HotSpot>
+
+
+                                                            <Canvas x:Name="Pin" Margin="-10,-28,0,0" Height="32" Width="20" HorizontalAlignment="Center">
+                                                                <Image Height="32" Width="20" Stretch="Fill" Source="/MySisEvo;component/Images/bullet_pin_red.png" />
+                                                                <Canvas Height="50" Margin="-20,-30,0,0" Width="60">
+                                                                    <Image Margin="10,25,0,0" Stretch="Fill" Cursor="Hand" Source="{Binding Path=AracIcon}" />
+                                                                </Canvas>
+
+                                                            </Canvas>
+
+                                                        </Canvas>
+                                                    </DataTemplate>
+                                                </telerik:InformationLayer.ItemTemplate>
+                                    </telerik:InformationLayer>
+                                    <telerik:InformationLayer Name="layerTools">
+                                        <telerik:InformationLayer.ItemTemplate>
+                                            <DataTemplate >
+                                                <Canvas>
+
+                                                    <telerik:MapLayer.HotSpot>
+                                                        <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                    </telerik:MapLayer.HotSpot>
+
+                                                    <Canvas x:Name="Pin" Margin="-10,-7,0,0" Height="32" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Image Height="14" Width="13" Stretch="Fill" Source="/MySisEvo;component/Images/pin_y.png" />
+                                                    </Canvas>
+                                                    <ToolTipService.ToolTip>
+                                                        <ToolTip>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="Kontak Açıldı : "/>
+                                                                    <TextBlock Text="{Binding Path=DT_TAR1H, StringFormat=\{0:u\}}"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="Kontak Kapandı : "/>
+                                                                    <TextBlock Text="{Binding Path=DT_TAR1HK,StringFormat=\{0:u\}}"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="Adres : "/>
+                                                                    <TextBlock Text="{Binding Path=DT_ADRES}" />
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </ToolTip>
+                                                    </ToolTipService.ToolTip>
+
+                                                    </Canvas>
+                                            </DataTemplate>
+                                        </telerik:InformationLayer.ItemTemplate>
+                                    </telerik:InformationLayer>
+                                    <telerik:InformationLayer Name="lyrKK">
+                                        <telerik:InformationLayer.ItemTemplate>
+                                            <DataTemplate >
+                                                <Canvas>
+
+                                                    <telerik:MapLayer.HotSpot>
+                                                        <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                    </telerik:MapLayer.HotSpot>
+
+                                                    <Canvas x:Name="Pin" Margin="-10,-7,0,0" Height="32" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Image Height="14" Width="13" Stretch="Fill" Source="/MySisEvo;component/Images/pin_o.png" />
+                                                    </Canvas>
+                                                     <ToolTipService.ToolTip>
+                                                        <ToolTip>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="Kontak Kapandı : "/>
+                                                                    <TextBlock Text="{Binding Path=DT_TAR1H, StringFormat=\{0:u\}}"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="Adres : "/>
+                                                                    <TextBlock Text="{Binding Path=DT_ADRES}" />
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </ToolTip>
+                                                    </ToolTipService.ToolTip>
+
+                                                </Canvas>
+                                            </DataTemplate>
+                                        </telerik:InformationLayer.ItemTemplate>
+                                    </telerik:InformationLayer>
+                                                <telerik:InformationLayer Name="lyrKP">
+                                                    <telerik:InformationLayer.ItemTemplate>
+                                                        <DataTemplate >
+                                                            <Canvas>
+
+                                                                <telerik:MapLayer.HotSpot>
+                                                                    <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                                </telerik:MapLayer.HotSpot>
+
+                                                                <Canvas x:Name="Pin" Margin="-10,-3,0,0" Height="32" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                    <Image Height="8" Width="7" Stretch="Fill" Source="/MySisEvo;component/Images/pinr7.png" />
+                                                                </Canvas>
+                                                                <ToolTipService.ToolTip>
+                                                                    <ToolTip>
+                                                                        <StackPanel Orientation="Vertical">
+                                                                            <TextBlock Text="Tarih-Zaman :"/>
+                                                                            <TextBlock Text="{Binding Path=DT_TAR1H, StringFormat=\{0:u\}}" />
+                                                                            <TextBlock Text="Adres:"/>
+                                                                            <TextBlock Text="{Binding Path=DT_ADRES}" />
+                                                                        </StackPanel>
+                                                                    </ToolTip>
+                                                                </ToolTipService.ToolTip>
+
+                                                            </Canvas>
+                                                        </DataTemplate>
+                                                    </telerik:InformationLayer.ItemTemplate>
+                                                </telerik:InformationLayer>
+                                        
+                                            <telerik:InformationLayer Name="layerTanim1">
+                                                <telerik:InformationLayer.ItemTemplate>
+                                                    <DataTemplate >
+                                                        <Canvas>
+                                                            <telerik:MapLayer.HotSpot>
+                                                                <telerik:HotSpot X="0.5" Y="1.0" ElementName="Pin" />
+                                                            </telerik:MapLayer.HotSpot>
+
+                                                            <Canvas x:Name="Pin" Margin="-10,-28,0,0" Height="32" Width="20" HorizontalAlignment="Center">
+                                                                <Image Height="32" Width="20" Stretch="Fill" Source="/MySisEvo;component/Images/bullet_pin_red.png" />
+                                                            </Canvas>
+
+                                                        </Canvas>
+                                                    </DataTemplate>
+                                                </telerik:InformationLayer.ItemTemplate>
+
+                                            </telerik:InformationLayer>
+                                            
+                                        </telerik:RadMap>
+                                    <toolKitControls:BusyIndicator Name="GloBusy" Background="Transparent" BusyContent="Lutfen Bekleyin.."/>
+                                    <StackPanel Height="200" VerticalAlignment="Top" >
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="35"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="35"/>
+                                                </Grid.ColumnDefinitions>
+                                                <telerik:RadButton Grid.Column="0" Margin="2" Height="35" Width="35" Click="bntAniBack_Click" >
+                                                    <telerik:RadButton.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="/MySisEvo;component/Images/left.png" Height="30" Width="30" />
+                                                        </StackPanel>
+                                                    </telerik:RadButton.Content>
+                                                    <ToolTipService.ToolTip>
+                                                        <ToolTip>
+                                                            <TextBlock Text="Geri"/>
+                                                        </ToolTip>
+                                                    </ToolTipService.ToolTip>
+                                                </telerik:RadButton>
+                                                <Slider Grid.Column="1" Name="aniSlider1" Margin="10" VerticalAlignment="Bottom" ValueChanged="aniSlider1_ValueChanged"
+                                                SmallChange="1" IsEnabled="False" IsEnabledChanged="aniSlider1_IsEnabledChanged" />
+                                                <telerik:RadButton Grid.Column="2" Margin="2" Height="35" Width="35" Click="bntAniNext_Click" >
+                                                    <telerik:RadButton.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Height="30" Width="30" Source="/MySisEvo;component/Images/right1.png" />
+                                                        </StackPanel>
+                                                    </telerik:RadButton.Content>
+                                                    <ToolTipService.ToolTip>
+                                                        <ToolTip>
+                                                            <TextBlock Text="İleri"/>
+                                                        </ToolTip>
+                                                    </ToolTipService.ToolTip>
+                                                </telerik:RadButton>
+                                            </Grid>
+                                            <StackPanel Orientation="Vertical" Margin="10" Background="Gray" HorizontalAlignment="Right" >
+                                            <StackPanel Orientation="Horizontal" Margin="2">
+                                                <TextBlock Text="Toplam Süre" Width="70" Foreground="#FFFFFFFF" />
+                                                <TextBlock Text="=" Foreground="#FFFFFFFF" />
+                                                <TextBlock Name="dSureTop"  Text="00:00:00" Foreground="#FFFFFFFF" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="2">
+                                                <TextBlock Text="Toplam KM" Width="70" Foreground="#FFFFFFFF" />
+                                                <TextBlock Text="=" Foreground="#FFFFFFFF" />
+                                                <TextBlock Name="dKmTop"  Text="000,00 KM/H" Foreground="#FFFFFFFF" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="2">
+                                                <TextBlock Text="Aktif KM" Width="70" Foreground="#FFFFFFFF" />
+                                                <TextBlock Text="=" Foreground="#FFFFFFFF" />
+                                                <TextBlock Name="dKmSayac"  Text="000,00 KM/H" Foreground="#FFFFFFFF" />
+                                            </StackPanel>
+                                            
+                                            <!--<StackPanel Orientation="Horizontal" Margin="2">
+                                                <TextBlock Text="Aktif Süre" Width="70" Foreground="#FFFFFFFF" />
+                                                <TextBlock Text="=" Foreground="#FFFFFFFF" />
+                                                <TextBlock Name="dSureSayac"  Text="00:00:00" Foreground="#FFFFFFFF" />
+                                            </StackPanel>-->
+                                    </StackPanel>
+                                   
+                                </StackPanel>
+                            </Grid>
+                        </telerik:RadPane>
+                                    <telerik:RadPane Name="PaneArcDetay" Header="Araç Detayları" Visibility="Collapsed">
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel Orientation="Vertical" Width="300">
+                                                <StackPanel Orientation="Vertical" Margin="10 15 10 10">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Margin="0,0,0,0" Text="PLAKA" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dPlaka" Foreground="#FF000000" />
+                                                        <TextBlock Margin="0,5,0,0" Text="MARKA" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dMarka" Foreground="#FF000000" />
+                                                        <TextBlock Margin="0,5,0,0" Text="CINS" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dCins" Foreground="#FF000000" />
+                                                        <TextBlock Margin="0,5,0,0" Text="TEL" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dTel" Foreground="#FF000000" />
+
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Width="300">
+                                                <StackPanel Orientation="Vertical" Margin="10 15 10 10">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Margin="0,0,0,0" Text="SERİ NO" Foreground="#FF000000" Visibility="Collapsed" />
+                                                    <TextBox Margin="0,0,0,0" Name="dSeriNo" Foreground="#FF000000" Visibility="Collapsed" />
+                                                        <TextBlock Margin="0,5,0,0" Text="MODEL" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dModel" Foreground="#FF000000" />
+                                                        <TextBlock Margin="0,5,0,0" Text="RENK" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dRenk" Foreground="#FF000000" />
+                                                        <TextBlock Margin="0,5,0,0" Text="SAHİBİ" Foreground="#FF000000" />
+                                                        <TextBox Margin="0,0,0,0" Name="dSahibi" Foreground="#FF000000" />
+                                                        <TextBlock Margin="0,5,0,0" Text="ICON" Foreground="#FF000000" />
+                                                        <ComboBox Name="dComboImg" ItemsSource="{Binding Path=AracIconList}">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Image HorizontalAlignment="Center" Width="50" Height="20" Source="{Binding}" />
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                        <telerik:RadButton  Width="100" Height="35" Margin="0,5,0,0" HorizontalAlignment="Right" Click="btnArcUpdate_Click" >
+                                                            <telerik:RadButton.Content>
+                                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                                    <Image Source="/MySisEvo;component/Images/accept.png" Height="30" Width="30" />
+                                                                    <TextBlock Text="KAYDET" Margin="5,8,0,0" Foreground="Navy"/>
+                                                                </StackPanel>
+                                                            </telerik:RadButton.Content>
+                                                        </telerik:RadButton>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            
+                                            <StackPanel Orientation="Vertical" Width="330">
+                                                <StackPanel Orientation="Vertical" Margin="10 15 10 10">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <Border Background="Transparent" Width="330">
+                                                            <StackPanel Name="stkDene" Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
+                                                                <Button x:Name="btnFup" Content="Resim Yükle" HorizontalAlignment="Left" Margin="5" Click="btnFup_Click" />
+                                                                <toolKitControls:BusyIndicator Name="fupBusy" IsBusy="False" Background="Transparent" 
+                                                                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                                <Image x:Name="dimgUpload" Width="300" Stretch="Uniform" Margin="5" 
+                                                                        VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                                    <Image.Effect>
+                                                                        <DropShadowEffect Color="Black" Direction="315" Opacity="0.8" ShadowDepth="7"/>
+                                                                    </Image.Effect>
+                                                                </Image>
+                                                            </StackPanel>
+                                                        </Border>
+                                                        
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        </telerik:RadPane>
+                        
+                                <telerik:RadPane Name="PaneAlarmlar" Header="Geçmiş Alarmlar" Visibility="Collapsed" >
+                                    <Grid HorizontalAlignment="Center" Background="Aquamarine">
+                                        <telerik:RadGridView Name="alarmlarGrid" AutoGenerateColumns="False"
+                                    CanUserFreezeColumns="False"
+                                    RowIndicatorVisibility="Collapsed" Foreground="Navy"
+                                    ShowGroupPanel="False">
+                                            <telerik:RadGridView.Columns>
+                                                <telerik:GridViewDataColumn Header="ID" ShowDistinctFilters="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Margin="2" Text="{Binding ALRM_ID}" Foreground="Navy" />
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+                                                <telerik:GridViewDataColumn Header="PLAKA" ShowDistinctFilters="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Margin="2" Text="{Binding ALRM_PLAKA}" Foreground="Navy" />
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+                                                <telerik:GridViewDataColumn Header="ALARM TÜRÜ" ShowDistinctFilters="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Margin="2" Text="{Binding ALRM_TUR}" Foreground="Navy" />
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+                                                <telerik:GridViewDataColumn Header="ALARM ACIKLAMASI" ShowDistinctFilters="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Margin="2" Text="{Binding ALRM_NOT}" Foreground="Navy" />
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+                                                <telerik:GridViewDataColumn Header="TARİH SAAT" ShowDistinctFilters="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Margin="2" Text="{Binding ALRM_TAR}" Foreground="Navy" />
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+
+                                            </telerik:RadGridView.Columns>
+                                        </telerik:RadGridView>
+                                    </Grid>
+                                </telerik:RadPane>
+                            </telerik:RadPaneGroup>
+                </telerik:RadSplitContainer>
+            </telerik:RadDocking.DocumentHost>
+
+                    <telerik:RadSplitContainer InitialPosition="DockedLeft">
+                        <telerik:RadPaneGroup>
+                            <telerik:RadPane Name="PaneAraclar" Header="Araç Listesi">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox Name="txtAra" Height="30"  MinWidth="190" Margin="2" Text="Ara" Foreground="Navy" TextChanged="TextBox_TextChanged" />
+                                        <telerik:RadButton Margin="2" Height="35" Width="35" Name="btnArcAra" Click="btnArcAra_Click" >
+                                            <telerik:RadButton.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="/MySisEvo;component/Images/Zoom.png" Height="30" Width="30" />
+                                                </StackPanel>
+                                            </telerik:RadButton.Content>
+                                            <ToolTipService.ToolTip>
+                                                <ToolTip>
+                                                    <TextBlock Text="Ara"/>
+                                                </ToolTip>
+                                            </ToolTipService.ToolTip>
+                                        </telerik:RadButton>
+                                    </StackPanel>
+                                    <Grid>
+                                        <ListBox Grid.Column="1"  HorizontalAlignment="Left" Name="listBox1" 
+                                                 VerticalAlignment="Top" Margin="0,0,0,0" Grid.RowSpan="2"
+                                                 ItemsSource="{Binding Path=AraclarList}"
+                                                 SelectedItem="{Binding Path=Arac, Mode=TwoWay}" 
+                                                 MinWidth="145" SelectionChanged="listBox1_SelectionChanged">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Width="220">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="145"/>
+                                                            <ColumnDefinition Width="25" />
+                                                            <ColumnDefinition Width="25" />
+                                                            <!--<ColumnDefinition Width="25" />-->
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="30" />
+                                                        </Grid.RowDefinitions>
+                                                        <Image Grid.Column="0" Source="/MySisEvo;component/Images/plaka30.png" Height="30">
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                        <StackPanel>
+                                                                            <Image Width="150" Stretch="Uniform" Margin="5" Source="{Binding Path=ARC_RES1M}">
+                                                                                <Image.Effect>
+                                                                                    <DropShadowEffect Color="Black" Direction="315" Opacity="0.8" ShadowDepth="7"/>
+                                                                                </Image.Effect>
+                                                                            </Image>
+                                                                        </StackPanel>
+                                                                    </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <TextBlock Grid.Column="0" Margin="25,5,0,0" Text="{Binding Path=ARC_PLAKA}"  FontSize="15" FontFamily="Arial Black" Foreground="Navy">
+                                                        <ToolTipService.ToolTip><ToolTip>
+                                                            <StackPanel>
+                                                                <Image Width="150" Stretch="Uniform" Margin="5" Source="{Binding Path=ARC_RES1M}">
+                                                                    <Image.Effect>
+                                                                        <DropShadowEffect Color="Black" Direction="315" Opacity="0.8" ShadowDepth="7"/>
+                                                                    </Image.Effect>
+                                                                </Image>
+                                                            </StackPanel>
+                                                        </ToolTip></ToolTipService.ToolTip>
+                                                    </TextBlock>
+                                                        <!--<Image Grid.Column="1" Source="/MySisEvo;component/Images/info.png" Height="25" Width="25" MouseLeftButtonDown="ImageDetay_Click" Tag="{Binding Path=ARC_SERINO}">
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Detaylar"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>-->
+                                                        <Image Grid.Column="1" Source="/MySisEvo;component/Images/Loff.png"  Height="25" Width="25" >
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Baglantı Yok"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <Image Visibility="{Binding Path=ARC_KOPMA}" Grid.Column="1" Source="/MySisEvo;component/Images/Lon.png"  Height="25" Width="25" >
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Baglantı Var"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <Image Grid.Column="2" Source="/MySisEvo;component/Images/pin_green.png"  Height="25" Width="25" MouseLeftButtonDown="ImagePin_Click" Tag="{Binding Path=ARC_SERINO}">
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Haritada Göster"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <Image Grid.Column="3" Source="/MySisEvo;component/Images/keyg.png"  Height="25" Width="25" >
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Kontak Kapalı"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <Image Visibility="{Binding Path=ARC_KONTAK}" Grid.Column="3" Source="/MySisEvo;component/Images/keyn.png"  Height="25" Width="25" >
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Kontak Açık"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>
+                                                        <CheckBox Visibility="Collapsed" Margin="120,5,5,5" Grid.Column="0" Tag="{Binding Path=ARC_SERINO}" Checked="ArcSec_Checked" Unchecked="ArcSec_Checked">
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Seç"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </CheckBox>
+                                                        <!--<Image Grid.Column="3" Source="/MySisEvo;component/Images/arrow_undo.png" Height="25" Width="25" MouseLeftButtonDown="ImageAni_Click" Tag="{Binding Path=ARC_SERINO}">
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip>
+                                                                    <TextBlock Text="Geçmişi İzle"/>
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                        </Image>-->
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </Grid>
+
+                                </StackPanel>
+                            </telerik:RadPane>
+                        </telerik:RadPaneGroup>
+                    </telerik:RadSplitContainer>
+                    <telerik:RadSplitContainer InitialPosition="DockedRight">
+                        <telerik:RadPaneGroup>
+                        <telerik:RadPane Name="PaneAnimeOptions" Header="Geçmiş Ayarları" Visibility="Collapsed">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" Margin="10 15 10 10">
+                                        <!--<TextBlock Text="Araç Seçimi" Foreground="#FF000000" />
+                                        <ComboBox Name="aComboArc" ItemsSource="{Binding Path=AraclarList}" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                        <Grid HorizontalAlignment="Center">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="145"/>
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="30" />
+                                                            </Grid.RowDefinitions>
+                                                            <Image Grid.Column="0" Source="/MySisEvo;component/Images/plaka30.png" Height="30" />
+                                                            <TextBlock Grid.Column="0" Margin="25,5,0,0" Text="{Binding Path=ARC_PLAKA}"  FontSize="14" FontFamily="Arial Black" Foreground="Navy"/>
+                                                        </Grid>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>-->
+                                        <telerik:RadButton Name="btnArcSecAni" Height="35" Margin="5" Click="btnArcSecAni_Click"  >
+                                            <telerik:RadButton.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="/MySisEvo;component/Images/Cars/ww2_40x27.png" HorizontalAlignment="Left" Height="30" Width="30" />
+                                                    <TextBlock Name="txtArcSecSay2" Text="ARAC SECiNiZ" Foreground="Navy" Margin="5,7,0,0" HorizontalAlignment="Center" />
+                                                </StackPanel>
+                                            </telerik:RadButton.Content>
+                                        </telerik:RadButton>
+                                        <TextBlock Text="Başlangıç Zamanı" Foreground="#FF000000" Margin="0 10 0 0" />
+                                        <telerik:RadDateTimePicker x:Name="AniBasTar" MouseEnter="AniBasTar_MouseEnter" />
+                                        <TextBlock Text="Bitiş Zamanı" Margin="0 10 0 0" Foreground="#FF000000" />
+                                        <telerik:RadDateTimePicker x:Name="AniBitTar" MouseEnter="AniBasTar_MouseEnter" />
+                                        <TextBlock Text="Oynatma Hızı" Margin="0 10 0 0" Foreground="#FF000000" />
+                                        <telerik:RadSlider Name="hizSlider" Maximum="1000" Minimum="1" Width="200" Value="500"
+                                        HandlesVisibility="Visible" ValueChanged="hizSlider_ValueChanged"></telerik:RadSlider>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="10 0 10 10" Visibility="Collapsed">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                            <CheckBox Name="chamYol"  Width="120"
+                                                Content=" Algılanan Yol"  Margin="10 5 10 0" Foreground="#FF000000" IsChecked="True" />
+                                            <Canvas Width="10" Height="10" Background="Red" />
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox Name="cvarYol" Width="120"
+                                                Content=" Varsayılan Yol"  Margin="10 5 10 0" Foreground="#FF000000" />
+                                            <Canvas Width="10" Height="10" Background="Blue" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <telerik:RadButton Name="btnPlay" Click="btnPlay_Click" Width="35" Height="35" Margin="10" IsEnabled="False" >
+                                            <telerik:RadButton.Content>
+                                                <Image Source="/MySisEvo;component/Images/play.png" Height="30" Width="30"  />
+                                            </telerik:RadButton.Content>
+                                        </telerik:RadButton>
+                                        <telerik:RadButton Name="btnduraklat" Click="btnduraklat_Click" Width="35" Height="35" Margin="10" IsEnabled="False" >
+                                            <telerik:RadButton.Content>
+                                                <Image Source="/MySisEvo;component/Images/player%20pause.png" Height="30" Width="30" />
+                                            </telerik:RadButton.Content>
+                                        </telerik:RadButton>
+                                        <telerik:RadButton Name="btnStop" Click="btnStop_Click" Width="35" Height="35" Margin="10" IsEnabled="False" >
+                                            <telerik:RadButton.Content>
+                                                <Image Source="/MySisEvo;component/Images/STop.png" Height="30" Width="30" />
+                                            </telerik:RadButton.Content>
+                                        </telerik:RadButton>
+                                        <telerik:RadButton Name="btnAniCiz" Click="btnAniCiz_Click" Width="35" Height="35" Margin="10">
+                                            <telerik:RadButton.Content>
+                                                <Image Source="/MySisEvo;component/Images/Pencil.png" Height="30" Width="30" />
+                                            </telerik:RadButton.Content>
+                                        </telerik:RadButton>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Orientation="Vertical" Margin="10 5 10 10" Name="stackAniDetay" Visibility="Collapsed" >
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Margin="0,0,0,0" TextAlignment="Center" Text="Tarih-Saat" Foreground="#FF000000" />
+                                            <TextBox Margin="0,0,0,0" TextAlignment="Center" Name="aTarih" 
+                                                     IsReadOnly="True" Foreground="#FF000000" />
+                                            <TextBlock Margin="0,5,0,0" TextAlignment="Center" Text="Kontak" Foreground="#FF000000" />
+                                            <TextBox Margin="0,0,0,0" TextAlignment="Center" Name="aKontak" 
+                                                     IsReadOnly="True" Foreground="#FF000000" />
+                                            <TextBlock Margin="0,5,0,0" TextAlignment="Center" Text="Hız" Foreground="#FF000000" />
+                                            <TextBox Margin="0,0,0,0" TextAlignment="Center" Name="aHiz" 
+                                                     IsReadOnly="True" Foreground="#FF000000" />
+                                            <TextBlock Margin="0,5,0,0" TextAlignment="Center" Text="Max Hız" Foreground="#FF000000" />
+                                            <TextBox Margin="0,0,0,0" TextAlignment="Center" Name="aMaxHiz" 
+                                                     IsReadOnly="True" Foreground="#FF000000" />
+                                            <TextBlock Margin="0,5,0,0" TextAlignment="Center" Text="KM Sayacı" Foreground="#FF000000" Visibility="Collapsed" />
+                                            <TextBox Margin="0,0,0,0" TextAlignment="Center" Name="aKmSayac" Visibility="Collapsed"
+                                                     IsReadOnly="True" Foreground="#FF000000" />
+                                            <TextBlock Margin="0,5,0,0" TextAlignment="Center" Text="Adres" Foreground="#FF000000" />
+                                            <TextBox Margin="0,0,0,0" TextAlignment="Center"  Name="aAdres" Height="50"
+                                                     IsReadOnly="True" Foreground="#FF000000" TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    
+                                </StackPanel>
+                            </telerik:RadPane>
+
+                            <telerik:RadPane Name="PaneTanim1" Header="Tanım Ayarları" Visibility="Collapsed" >
+                                <StackPanel Orientation="Vertical">
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								        telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Rota Tanımlama" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+
+                                    <StackPanel Orientation="Vertical" Margin="10 0 10 10">
+                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
+                                            <TextBlock Margin="2" Text="Rota Adı :" Foreground="#FF000000"/>
+                                            <TextBox Margin="2"/>
+                                            <CheckBox  Width="120"  Content="Yol Üstüne Zorla"  Margin="10 5 10 0" Foreground="#FF000000" IsChecked="True" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <telerik:RadButton Margin="2" Height="35" Width="80" >
+                                                    <telerik:RadButton.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="/MySisEvo;component/Images/add.png" Height="30" Width="30" />
+                                                            <TextBlock Text="EKLE" Foreground="Navy" Margin="5,7,0,0" />
+                                                        </StackPanel>
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                                 <telerik:RadButton Margin="2" Height="35" Width="80" Name="btnRTBasla" Click="btnRTBasla_Click" >
+                                                    <telerik:RadButton.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="/MySisEvo;component/Images/Pencil.png" Height="30" Width="30" />
+                                                            <TextBlock Text="BAŞLA" Foreground="Navy" Margin="5,7,0,0" />
+                                                        </StackPanel>
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                               
+                                                <telerik:RadButton Margin="2" Height="35" Width="80" >
+                                                    <telerik:RadButton.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="/MySisEvo;component/Images/add.png" Height="30" Width="30" />
+                                                            <TextBlock Text="EKLE" Foreground="Navy" Margin="5,7,0,0" />
+                                                        </StackPanel>
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                                  <telerik:RadButton Margin="2" Height="35" Width="80" >
+                                                    <telerik:RadButton.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="/MySisEvo;component/Images/Recicle%20bin.png" Height="30" Width="30" />
+                                                            <TextBlock Text="SiL" Foreground="Navy" Margin="5,7,0,0" />
+                                                        </StackPanel>
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <ListBox Margin="0 10 0 0" Foreground="#FF000000" Height="300"></ListBox>
+                                    </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                    
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								        telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Bölge Tanımlama" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <telerik:RadButton Margin="2" Height="35" Width="80" >
+                                                        <telerik:RadButton.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="/MySisEvo;component/Images/add.png" Height="30" Width="30" />
+                                                                <TextBlock Text="EKLE" Foreground="Navy" Margin="5,7,0,0" />
+                                                            </StackPanel>
+                                                        </telerik:RadButton.Content>
+                                                    </telerik:RadButton>
+                                                    <telerik:RadButton Margin="2" Height="35" Width="80" Name="btnBLBasla" Click="btnBLBasla_Click" >
+                                                        <telerik:RadButton.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="/MySisEvo;component/Images/Pencil.png" Height="30" Width="30" />
+                                                                <TextBlock Text="BAŞLA" Foreground="Navy" Margin="5,7,0,0" />
+                                                            </StackPanel>
+                                                        </telerik:RadButton.Content>
+                                                    </telerik:RadButton>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+
+                                                    <telerik:RadButton Margin="2" Height="35" Width="80" >
+                                                        <telerik:RadButton.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="/MySisEvo;component/Images/add.png" Height="30" Width="30" />
+                                                                <TextBlock Text="EKLE" Foreground="Navy" Margin="5,7,0,0" />
+                                                            </StackPanel>
+                                                        </telerik:RadButton.Content>
+                                                    </telerik:RadButton>
+                                                    <telerik:RadButton Margin="2" Height="35" Width="80" >
+                                                        <telerik:RadButton.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="/MySisEvo;component/Images/Recicle%20bin.png" Height="30" Width="30" />
+                                                                <TextBlock Text="SiL" Foreground="Navy" Margin="5,7,0,0" />
+                                                            </StackPanel>
+                                                        </telerik:RadButton.Content>
+                                                    </telerik:RadButton>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                    
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								        telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Nokta-Konum Tanımlama" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+
+                                            <TextBlock Text="asd"/>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                   
+                                </StackPanel>
+                            </telerik:RadPane>
+                                
+                            <telerik:RadPane Name="PaneAlarmOp" Header="Alarm Ayarları" Visibility="Collapsed" >
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <telerik:RadButton Height="35" Margin="5" Click="bntArcSec_Click"  >
+                                        <telerik:RadButton.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="/MySisEvo;component/Images/Cars/ww2_40x27.png" HorizontalAlignment="Left" Height="30" Width="30" />
+                                                <TextBlock Name="txtArcSecSay1" Text="ARAC SECiNiZ" Foreground="Navy" Margin="5,7,0,0" HorizontalAlignment="Center" />
+                                            </StackPanel>
+                                        </telerik:RadButton.Content>
+                                    </telerik:RadButton>
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								        telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Bildirim" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="SMS için GSM No:" Foreground="Navy" Margin="2" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Name="ackSms" Checked="AlarmCek" Unchecked="AlarmCek" Tag="SMS" />
+                                                    <telerik:RadMaskedTextInput Name="aSms" Margin="2" HorizontalAlignment="Stretch" 
+                                                        Mask="#(###)#######" Width="190"/>
+                                                </StackPanel>
+                                                <TextBlock Text="E-Posta Adresi:" Foreground="Navy" Margin="2" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Name="ackEposta" Tag="EPOSTA" Checked="AlarmCek" Unchecked="AlarmCek" />
+                                                    <telerik:RadMaskedTextInput Name="aEpost" Margin="2" HorizontalAlignment="Stretch" 
+                                                                                Width="190" Mask="a25" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                    
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								 telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Hız Alarm Tanımı" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Hız Limiti (KM/S) :"  Foreground="Navy" Margin="2" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Name="ackHizLim"/>
+                                                    <telerik:RadMaskedNumericInput x:Name="aHizLim" Margin="2" Width="190"
+                                                    AllowSkipPlaceholders="False"
+                                                    AutoFillNumberGroupSeparators="False"
+                                                    AutoFillZeros="False"
+                                                    Culture="tr-TR"
+                                                    IsClearButtonVisible="True"
+                                                    Mask="#3"/>
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								 telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Mesai Dışı Çalışma Alarm Tanımı" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Mesai Saatleri:" Foreground="Navy" Margin="2" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Name="ackMesai" />
+                                                    <telerik:RadDateTimePicker Name="aMesaiBas" Width="90" Margin="1" DateTimeWatermarkContent="Baslangic"
+									                    DisplayFormat="Short" InputMode="TimePicker" Culture="tr-TR"/>
+                                                    <TextBlock Text="-" Foreground="Navy" Margin="1"/>
+                                                    <telerik:RadDateTimePicker Name="aMesaiBit" Width="90" Margin="1"  DateTimeWatermarkContent="Bitis"
+									                    DisplayFormat="Short" InputMode="TimePicker" Culture="tr-TR"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								 telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Duraklama Alarm Tanımı" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Duraklama Süresi Limiti (ss:dd:sn) :" Foreground="Navy" Margin="2" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Name="ackDurak" Margin="1"/>
+                                                    <telerik:RadDateTimePicker Name="aDurakla" Width="190" Margin="1" DateTimeWatermarkContent="ss:dd:sn"
+									                    DisplayFormat="Long" InputMode="TimePicker" Culture="tr-TR"/>
+                                                    
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                    <telerik:RadExpander IsExpanded="False" VerticalContentAlignment="Top"
+								 telerik:AnimationManager.IsAnimationEnabled="True">
+                                        <telerik:RadExpander.Header>
+                                            <TextBlock Text="Rolanti Alarm Tanımı" Foreground="Navy"/>
+                                        </telerik:RadExpander.Header>
+                                        <telerik:RadExpander.Content>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Rolanti Süresi Limiti (ss:dd:sn) :" Foreground="Navy" Margin="2" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Name="ackRolant" Margin="1"/>
+                                                    <telerik:RadDateTimePicker Name="aRolant" Width="190" Margin="1" DateTimeWatermarkContent="ss:dd:sn"
+									                    DisplayFormat="Long" InputMode="TimePicker" Culture="tr-TR"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </telerik:RadExpander.Content>
+                                    </telerik:RadExpander>
+                                 <StackPanel Orientation="Horizontal">
+                                        <telerik:RadButton Name="btnAlarmTemizle" Margin="2" Height="35" Width="100" Click="btnAlarmTemizle_Click">
+                                            <telerik:RadButton.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="/MySisEvo;component/Images/Recicle%20bin.png" Height="30" Width="30" />
+                                                    <TextBlock Text="TEMiZLE" Foreground="Navy" Margin="5,7,0,0" />
+                                                </StackPanel>
+                                            </telerik:RadButton.Content>
+                                        </telerik:RadButton>
+                                    
+                                        <telerik:RadButton Name="btnAlarmKaydet" Margin="2" Height="35" Width="100" Click="btnAlarmKaydet_Click">
+                                        <telerik:RadButton.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="/MySisEvo;component/Images/accept.png" Height="30" Width="30" />
+                                                <TextBlock Text="KAYDET" Foreground="Navy" Margin="5,7,0,0" />
+                                            </StackPanel>
+                                        </telerik:RadButton.Content>
+                                    </telerik:RadButton>
+                                </StackPanel>
+                                </StackPanel>
+                            </telerik:RadPane>
+                            <telerik:RadPane Name="PaneArama" Header="Adres Arama" Visibility="Collapsed" >
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" Margin="10 15 10 10">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBox Name="txtAdrsAra" Margin="0,10,0,0" Foreground="#FF000000" Text="Adapazarı, Sakarya" />
+                                            <telerik:RadButton  Width="35" Height="35" Margin="0,5,0,0" HorizontalAlignment="Right" Click="btnAdrsAra_Click" >
+                                                <telerik:RadButton.Content>
+                                                    <Image Source="/MySisEvo;component/Images/Zoom.png" Height="30" Width="30" />
+                                                </telerik:RadButton.Content>
+                                            </telerik:RadButton>
+                                            <ListBox Margin="0 10 0 0" Foreground="#FF000000" Height="300"></ListBox>
+                                        </StackPanel>
+                                        
+                                    </StackPanel>
+                                </StackPanel>
+                            </telerik:RadPane>
+                            <telerik:RadPane Name="PaneYol" Header="Yol Arama">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" Margin="10 15 10 10">
+                                            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                                            <RadioButton Name="radioKYol"  Margin="0,5,0,0" IsChecked="True" Foreground="#FF000000"
+						                                 Content="En Kısa Yol" />
+                                            <RadioButton   Margin="0,5,0,0" Foreground="#FF000000"
+						                                 Content="En Kısa Süre" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                                            <RadioButton Name="radioOpTrafik"  Margin="0,5,0,0" Foreground="#FF000000"
+						                             Content="Optimum Trafik" />
+                                            <RadioButton  Margin="0,5,0,0" Name="radioOpSTrafik" Foreground="#FF000000"
+						                             Content="Optimum Trafik ve Süre" />
+                                            <RadioButton  Margin="0,5,0,0" Name="radioNOpTrafik"  IsChecked="True" Foreground="#FF000000"
+						                             Content="Trafik Optimizasyonu Yok" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                                            <RadioButton Name="radioDrvType"  Margin="0,5,0,0" IsChecked="True" Foreground="#FF000000"
+						                                Content="Araç Yolu" />
+                                            <RadioButton  Margin="0,5,0,0" Foreground="#FF000000"
+						                                Content="Yaya Yolu" />
+                                            </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0"  >
+                                            <telerik:RadButton  Width="35" Height="35" Margin="0,5,0,0" HorizontalAlignment="Right" Click="btnYolSil_Click">
+                                                <telerik:RadButton.Content>
+                                                    <Image Source="/MySisEvo;component/Images/Recicle%20bin.png" Height="30" Width="30" />
+                                                </telerik:RadButton.Content>
+                                            </telerik:RadButton>
+                                            <telerik:RadButton  Width="35" Height="35" Margin="0,5,0,0"  Click="btnMap2Yol_Click" >
+                                                <telerik:RadButton.Content>
+                                                    <Image Source="/MySisEvo;component/Images/Pencil.png" Height="30" Width="30" />
+                                                </telerik:RadButton.Content>
+                                            </telerik:RadButton>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </StackPanel>
+                            </telerik:RadPane>
+                        </telerik:RadPaneGroup>
+            </telerik:RadSplitContainer>
+
+        </telerik:RadDocking>
+        </StackPanel>
+            </StackPanel>
+    </Grid>
+</navigation:Page>

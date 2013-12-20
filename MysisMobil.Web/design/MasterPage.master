@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head runat="server"> 
+  <!--
+    Created by Artisteer v3.0.0.32906
+    Base template (without user's data) checked by http://validator.w3.org : "This page is valid XHTML 1.0 Transitional"
+  -->
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />  
+  <title><asp:contentplaceholder id="TitleContentPlaceHolder" runat="server"></asp:contentplaceholder></title>
+  <link rel="stylesheet" href="~/style.css" type="text/Css" />
+  <!--[if IE 6]><link rel="stylesheet" href="~/style.ie6.css" type="text/Css" media="screen" /><![endif]-->
+  <!--[if IE 7]><link rel="stylesheet" href="~/style.ie7.css" type="text/Css" media="screen" /><![endif]-->
+  <asp:ContentPlaceHolder ID="ScriptIncludePlaceHolder" runat="server">
+  <script type="text/javascript" src="<%= ResolveUrl("~/jquery.js") %>"></script>
+  <script type="text/javascript" src="<%= ResolveUrl("~/script.js") %>"></script>
+  </asp:ContentPlaceHolder>
+</head> 
+<body>
+<form id="frmMain" runat="server" >
+<div id="art-main">
+<div class="art-sheet">
+    <div class="art-sheet-tl"></div>
+    <div class="art-sheet-tr"></div>
+    <div class="art-sheet-bl"></div>
+    <div class="art-sheet-br"></div>
+    <div class="art-sheet-tc"></div>
+    <div class="art-sheet-bc"></div>
+    <div class="art-sheet-cl"></div>
+    <div class="art-sheet-cr"></div>
+    <div class="art-sheet-cc"></div>
+    <div class="art-sheet-body">
+<div class="art-header">
+ <div class="art-header-png"></div>
+ <div class="art-header-jpeg"></div>
+ <asp:contentplaceholder id="HeaderContentPlaceHolder" runat="server"></asp:contentplaceholder>
+</div>
+<div class="art-nav">
+	<div class="l"></div>
+	<div class="r"></div>
+	<asp:contentplaceholder id="MenuContentPlaceHolder" runat="server"></asp:contentplaceholder>
+</div>
+<div class="art-content-layout">
+    <div class="art-content-layout-row">
+<div class="art-layout-cell art-content">
+<asp:contentplaceholder id="SheetContentPlaceHolder" runat="server"></asp:contentplaceholder>
+  <div class="cleared"></div>
+</div>
+<div class="art-layout-cell art-sidebar1">
+<asp:contentplaceholder id="Sidebar1ContentPlaceHolder" runat="server"></asp:contentplaceholder>
+  <div class="cleared"></div>
+</div>
+
+    </div>
+</div>
+<div class="cleared"></div>
+
+<div class="art-footer">
+    <div class="art-footer-body">
+        <div class="art-footer-text">
+<p>Copyright &copy; <%= DateTime.Now.Year %>, Mysis Technologies. All Rights Reserved.</p>
+
+        </div>
+		<div class="cleared"></div>
+    </div>
+</div>
+
+		<div class="cleared"></div>
+    </div>
+</div>
+
+</div>
+</form>
+</body>
+</html>

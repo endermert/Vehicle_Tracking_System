@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e429cf57-9b69-44a9-b524-b762f0fdaa75" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://mysismobile.com/DataServis.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DataServis4.xsd" MetadataType="Schema" ID="fdc272e3-10ec-437a-861d-c452d3cc817b" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?xsd=xsd1" />
+    <MetadataFile FileName="DataServis41.xsd" MetadataType="Schema" ID="35013e4d-c795-48dd-9bb2-d637e97b665a" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?xsd=xsd3" />
+    <MetadataFile FileName="DataServis42.xsd" MetadataType="Schema" ID="f63f885f-b149-476d-b701-7453842c71b4" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?xsd=xsd2" />
+    <MetadataFile FileName="DataServis2.wsdl" MetadataType="Wsdl" ID="155ab3c7-910f-4a3c-b88a-1ad1101286ce" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?wsdl" />
+    <MetadataFile FileName="DataServis21.wsdl" MetadataType="Wsdl" ID="6148a130-7b0d-4824-b3d0-fa8e7a212514" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="DataServis1.disco" MetadataType="Disco" ID="a102b382-366a-4af8-89b6-754cf85a35ca" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?disco" />
+    <MetadataFile FileName="DataServis43.xsd" MetadataType="Schema" ID="960ee332-7c3a-488d-b7fc-591c152027a1" SourceId="1" SourceUrl="http://mysismobile.com/DataServis.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

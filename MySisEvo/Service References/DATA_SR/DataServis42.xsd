@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Datas">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARC_SER1NO" type="xs:int" />
+      <xs:element minOccurs="0" name="DT_1D" type="xs:int" />
+      <xs:element minOccurs="0" name="DT_ADRES" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_BOYLAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_BOYLAM_HAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_DURAKLAMA" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DT_ENLEM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_ENLEM_HAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_H1Z" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_KONTAK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DT_MESAFE" type="xs:double" />
+      <xs:element minOccurs="0" name="DT_TAR1H" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DT_TAR1HK" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Datas" nillable="true" type="tns:Datas" />
+  <xs:complexType name="ArrayOfDatas">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Datas" nillable="true" type="tns:Datas" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDatas" nillable="true" type="tns:ArrayOfDatas" />
+  <xs:complexType name="ArrayOfAlarmlar">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Alarmlar" nillable="true" type="tns:Alarmlar" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmlar" nillable="true" type="tns:ArrayOfAlarmlar" />
+  <xs:complexType name="Alarmlar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ALRM_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ALRM_KUL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ALRM_NOT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ALRM_OKUNDU" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ALRM_PLAKA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ALRM_TAR" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ALRM_TUR" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Alarmlar" nillable="true" type="tns:Alarmlar" />
+  <xs:complexType name="AlarmT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TNM_ARC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TNM_DURAKLAMA" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TNM_EPOSTA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TNM_GSM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TNM_HZLMT" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="TNM_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="TNM_KUL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TNM_MESA1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TNM_ROLANT" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AlarmT" nillable="true" type="tns:AlarmT" />
+  <xs:complexType name="ArrayOfAraclar">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Araclar" nillable="true" type="tns:Araclar" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAraclar" nillable="true" type="tns:ArrayOfAraclar" />
+  <xs:complexType name="Araclar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARC_CINS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_ICON" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ARC_KONTAK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_KOPMA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_MARKA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_MODEL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_PLAKA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_RENK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_RES1M" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_SAHIBI" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_SASINO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARC_SERINO" type="xs:int" />
+      <xs:element minOccurs="0" name="ARC_TEL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CHZ_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="FRM_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="GRP_ID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Araclar" nillable="true" type="tns:Araclar" />
+  <xs:complexType name="Kullanici">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deneme" type="xs:int" />
+      <xs:element minOccurs="0" name="FRM_1D" type="xs:int" />
+      <xs:element minOccurs="0" name="KUL_AD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KUL_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="KUL_SIFRE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Kullanici" nillable="true" type="tns:Kullanici" />
+</xs:schema>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="/Imports">
+      <xsd:import schemaLocation="http://mysismobile.com/DataServis.svc?xsd=xsd0" />
+      <xsd:import schemaLocation="http://mysismobile.com/DataServis.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://mysismobile.com/DataServis.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" />
+      <xsd:import schemaLocation="http://mysismobile.com/DataServis.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="DataServis_getData_InputMessage">
+    <wsdl:part name="parameters" element="getData" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getData_OutputMessage">
+    <wsdl:part name="parameters" element="getDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getDatas_InputMessage">
+    <wsdl:part name="parameters" element="getDatas" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getDatas_OutputMessage">
+    <wsdl:part name="parameters" element="getDatasResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getDataList_InputMessage">
+    <wsdl:part name="parameters" element="getDataList" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getDataList_OutputMessage">
+    <wsdl:part name="parameters" element="getDataListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getAlarmlar_InputMessage">
+    <wsdl:part name="parameters" element="getAlarmlar" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getAlarmlar_OutputMessage">
+    <wsdl:part name="parameters" element="getAlarmlarResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_setAlarmTanim_InputMessage">
+    <wsdl:part name="parameters" element="setAlarmTanim" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_setAlarmTanim_OutputMessage">
+    <wsdl:part name="parameters" element="setAlarmTanimResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getAraclar_InputMessage">
+    <wsdl:part name="parameters" element="getAraclar" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getAraclar_OutputMessage">
+    <wsdl:part name="parameters" element="getAraclarResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_updateArac_InputMessage">
+    <wsdl:part name="parameters" element="updateArac" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_updateArac_OutputMessage">
+    <wsdl:part name="parameters" element="updateAracResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getKullanici_InputMessage">
+    <wsdl:part name="parameters" element="getKullanici" />
+  </wsdl:message>
+  <wsdl:message name="DataServis_getKullanici_OutputMessage">
+    <wsdl:part name="parameters" element="getKullaniciResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DataServis">
+    <wsdl:operation name="getData">
+      <wsdl:input wsaw:Action="urn:DataServis/getData" message="DataServis_getData_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/getDataResponse" message="DataServis_getData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDatas">
+      <wsdl:input wsaw:Action="urn:DataServis/getDatas" message="DataServis_getDatas_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/getDatasResponse" message="DataServis_getDatas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataList">
+      <wsdl:input wsaw:Action="urn:DataServis/getDataList" message="DataServis_getDataList_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/getDataListResponse" message="DataServis_getDataList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAlarmlar">
+      <wsdl:input wsaw:Action="urn:DataServis/getAlarmlar" message="DataServis_getAlarmlar_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/getAlarmlarResponse" message="DataServis_getAlarmlar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setAlarmTanim">
+      <wsdl:input wsaw:Action="urn:DataServis/setAlarmTanim" message="DataServis_setAlarmTanim_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/setAlarmTanimResponse" message="DataServis_setAlarmTanim_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAraclar">
+      <wsdl:input wsaw:Action="urn:DataServis/getAraclar" message="DataServis_getAraclar_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/getAraclarResponse" message="DataServis_getAraclar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateArac">
+      <wsdl:input wsaw:Action="urn:DataServis/updateArac" message="DataServis_updateArac_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/updateAracResponse" message="DataServis_updateArac_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getKullanici">
+      <wsdl:input wsaw:Action="urn:DataServis/getKullanici" message="DataServis_getKullanici_InputMessage" />
+      <wsdl:output wsaw:Action="urn:DataServis/getKullaniciResponse" message="DataServis_getKullanici_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

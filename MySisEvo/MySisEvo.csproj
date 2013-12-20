@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1A4273A7-94C6-4BEC-BF39-065E9E5ADA20}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MySisEvo</RootNamespace>
+    <AssemblyName>MySisEvo</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>MySisEvo.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>MySisEvo.App</SilverlightAppEntry>
+    <TestPageFileName>TestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>true</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>..\MySisEvo.Web\MySisEvo.Web.csproj</LinkedServerProject>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20408.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.DomainServices.Client, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel.DomainServices.Client.Web, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel.Web.Extensions, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls.Data" />
+    <Reference Include="System.Windows.Controls.Data.Input" />
+    <Reference Include="System.Windows.Controls.Input" />
+    <Reference Include="System.Windows.Controls.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Bin\System.Windows.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Windows.Controls" />
+    <Reference Include="System.Windows.Controls.Navigation" />
+    <Reference Include="Telerik.ReportViewer.Silverlight">
+      <HintPath>..\..\..\..\..\Program Files\Telerik\Reporting Q2 2011\Bin\Telerik.ReportViewer.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Docking, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Gauge, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2011.2.920.1040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Service References\DATA_SR\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FUP_SR\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArcSec.xaml.cs">
+      <DependentUpon>ArcSec.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Adres.cs" />
+    <Compile Include="Classes\AracData.cs" />
+    <Compile Include="Classes\Entities.cs" />
+    <Compile Include="Classes\GecmisYol.cs" />
+    <Compile Include="Controls\ClientIslem.cs" />
+    <Compile Include="Controls\EkranAyarlari.cs" />
+    <Compile Include="Controls\MapClass.cs" />
+    <Compile Include="Controls\SocketIslemler.cs" />
+    <Compile Include="Controls\SrvIslemler.cs" />
+    <Compile Include="Controls\TiledBackground.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="URIHelper.cs" />
+    <Compile Include="Views\RaporPage.xaml.cs">
+      <DependentUpon>RaporPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Views\ArcSec.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\AppStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\CoreStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\GlobalValueConverters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\SDKStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <None Include="Assets\ToolkitStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <Page Include="LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\AppStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\GlobalValueConverters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RaporPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Assets\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="Views\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\car.png" />
+    <Resource Include="Images\car1.png" />
+    <Resource Include="Images\pin_green.png" />
+    <Resource Include="Images\info.png" />
+    <Resource Include="Images\plaka30.png" />
+    <Resource Include="Images\dashboard_info.png" />
+    <Resource Include="Images\arrow_undo.png" />
+    <Resource Include="Images\home.png" />
+    <Resource Include="Images\settings_add.png" />
+    <Resource Include="Images\users.png" />
+    <Resource Include="Images\arrow_maximize.png" />
+    <Resource Include="Images\arrow_minimize.png" />
+    <Resource Include="Images\pin_blue.png" />
+    <Resource Include="Images\magnify.png" />
+    <Resource Include="Images\Flag.png" />
+    <Resource Include="Images\arrow_refresh.png" />
+    <Resource Include="Images\car2_40x27.png" />
+    <Resource Include="Images\Zoom.png" />
+    <Resource Include="Images\play.png" />
+    <Resource Include="Images\STop.png" />
+    <Resource Include="Images\Recicle bin.png" />
+    <Resource Include="Images\Pencil.png" />
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\Cars\ww1_40x27.png" />
+    <Resource Include="Images\Cars\ww2_40x27.png" />
+    <Resource Include="Images\Cars\bmw_43x27.png" />
+    <Resource Include="Images\Cars\camaro_65x27.png" />
+    <Resource Include="Images\Cars\chev_52x27.png" />
+    <Resource Include="Images\Cars\ferrari_77x27.png" />
+    <Resource Include="Images\bullet_pin_red.png" />
+    <Resource Include="Images\accept.png" />
+    <Resource Include="Images\player pause.png" />
+    <Resource Include="Images\ImageIcon.png" />
+    <Resource Include="Images\users_off.png" />
+    <Resource Include="Images\bullet_pin_green.png" />
+    <Resource Include="Images\list.png" />
+    <Resource Include="Images\aniKey.png" />
+    <Resource Include="Images\key.gif" />
+    <Resource Include="Images\key1.gif" />
+    <Resource Include="Images\keyn.png" />
+    <Resource Include="Images\keyg.png" />
+    <Resource Include="Images\kontak_pin_a.png" />
+    <Resource Include="Images\pin_y.png" />
+    <Resource Include="Images\pin_o.png" />
+    <Resource Include="Images\pinr7.png" />
+    <Resource Include="Images\pinr.png" />
+    <None Include="Properties\OutOfBrowserSettings.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Resource Include="Images\Cars\7.png" />
+    <Resource Include="Images\Cars\8.png" />
+    <Resource Include="Images\Cars\9.png" />
+    <Resource Include="Images\edit1.png" />
+    <Resource Include="Images\accept1.png" />
+    <Resource Include="Images\clock_green.png" />
+    <Resource Include="Images\map_edit.png" />
+    <Resource Include="Images\Loff.png" />
+    <Resource Include="Images\Lon.png" />
+    <Resource Include="Images\Cars\10.png" />
+    <Resource Include="Images\Cars\11.png" />
+    <Resource Include="Images\Cars\12.png" />
+    <Resource Include="Images\Cars\13.png" />
+    <Resource Include="Images\Cars\14.png" />
+    <Resource Include="Images\Cars\15.png" />
+    <Resource Include="Images\left.png" />
+    <Resource Include="Images\deny.png" />
+    <Content Include="Images\Logo\mysis_128.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Logo\mysis_16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Logo\mysis_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Logo\mysis_48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Service References\DATA_SR\configuration91.svcinfo" />
+    <None Include="Service References\DATA_SR\configuration.svcinfo" />
+    <None Include="Service References\DATA_SR\DataServis2.wsdl" />
+    <None Include="Service References\DATA_SR\DataServis21.wsdl" />
+    <None Include="Service References\DATA_SR\DataServis4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DATA_SR\DataServis41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DATA_SR\DataServis42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DATA_SR\DataServis43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DATA_SR\MySisEvo.DATA_SR.Alarmlar.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DATA_SR\MySisEvo.DATA_SR.Araclar.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DATA_SR\MySisEvo.DATA_SR.Datas.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DATA_SR\MySisEvo.DATA_SR.Kullanici.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DATA_SR\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\FUP_SR\configuration91.svcinfo" />
+    <None Include="Service References\FUP_SR\configuration.svcinfo" />
+    <None Include="Service References\FUP_SR\FileUploadServis1.wsdl" />
+    <None Include="Service References\FUP_SR\MySisEvo.FUP_SR.DosyaBoyutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FUP_SR\MySisEvo.FUP_SR.KaydetResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FUP_SR\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Resource Include="Images\right1.png" />
+    <None Include="Service References\FUP_SR\FileUploadServis1.disco" />
+    <None Include="Service References\DATA_SR\DataServis1.disco" />
+    <Content Include="ServiceReferences.ClientConfig">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Images\backgroundshadow.png" />
+    <Resource Include="Images\backgroundtexture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loginfrm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DATA_SR\" />
+    <WCFMetadataStorage Include="Service References\FUP_SR\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

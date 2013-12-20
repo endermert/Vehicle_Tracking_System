@@ -1,0 +1,15 @@
+<OutOfBrowserSettings ShortName="Mysis Mobil" EnableGPUAcceleration="True" ShowInstallMenuItem="True">
+  <OutOfBrowserSettings.Blurb>Bu uygulama ile araçlarınızı evde, işte veya interneti olan herhangi bir yerde online olarak takip edebilirsiniz.. Ugulamanızı www.mysismobile.com adresini ziyaret ederek ister web gezgini ile isterseniz de masaüstü uygulaması gibi kullanabilirsiniz..</OutOfBrowserSettings.Blurb>
+  <OutOfBrowserSettings.WindowSettings>
+    <WindowSettings Title="Mysis Mobil Arac Takip Sistemi" />
+  </OutOfBrowserSettings.WindowSettings>
+  <OutOfBrowserSettings.SecuritySettings>
+    <SecuritySettings ElevatedPermissions="Required" />
+  </OutOfBrowserSettings.SecuritySettings>
+  <OutOfBrowserSettings.Icons>
+    <Icon Size="16,16">Images/Logo/mysis_16.png</Icon>
+    <Icon Size="32,32">Images/Logo/mysis_32.png</Icon>
+    <Icon Size="48,48">Images/Logo/mysis_48.png</Icon>
+    <Icon Size="128,128">Images/Logo/mysis_128.png</Icon>
+  </OutOfBrowserSettings.Icons>
+</OutOfBrowserSettings>

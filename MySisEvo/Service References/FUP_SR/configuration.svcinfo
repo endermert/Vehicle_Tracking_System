@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configurationSnapshot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:schemas-microsoft-com:xml-wcfconfigurationsnapshot">
+  <behaviors />
+  <bindings>
+    <binding digest="System.ServiceModel.Configuration.BasicHttpBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data maxBufferSize=&quot;2147483647&quot; name=&quot;FileUploadServisSoap&quot;&gt;&lt;security mode=&quot;None&quot; /&gt;&lt;/Data&gt;" bindingType="basicHttpBinding" name="FileUploadServisSoap" />
+  </bindings>
+  <endpoints>
+    <endpoint normalizedDigest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;http://mysismobile.com/FileUploadServis.asmx&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;FileUploadServisSoap&quot; contract=&quot;FUP_SR.FileUploadServisSoap&quot; name=&quot;FileUploadServisSoap&quot; /&gt;" digest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;http://mysismobile.com/FileUploadServis.asmx&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;FileUploadServisSoap&quot; contract=&quot;FUP_SR.FileUploadServisSoap&quot; name=&quot;FileUploadServisSoap&quot; /&gt;" contractName="FUP_SR.FileUploadServisSoap" name="FileUploadServisSoap" />
+  </endpoints>
+</configurationSnapshot>

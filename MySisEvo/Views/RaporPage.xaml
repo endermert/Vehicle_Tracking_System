@@ -1,0 +1,51 @@
+<navigation:Page x:Class="MySisEvo.RaporPage" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+    xmlns:telerikx="clr-namespace:Telerik.ReportViewer.Silverlight;assembly=Telerik.ReportViewer.Silverlight"    
+    xmlns:telerikNav="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+    xmlns:telerikControls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+    xmlns:telerikPrimitives ="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    d:DesignWidth="640" d:DesignHeight="300" mc:Ignorable="d"
+    Title="Raporlar | MysisMobil Arac Takip Sistemleri"
+    Style="{StaticResource PageStyle}">
+    
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="50" HorizontalAlignment="Right" Grid.Row="0">
+                <telerik:RadButton Margin="2" Height="35" Width="110" Click="RadButton_Click" >
+                    <telerik:RadButton.Content>
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Source="/MySisEvo;component/Images/home.png" Height="30" Width="30" />
+                            <TextBlock Text="ANASAYFA" Foreground="Navy" Margin="5,7,0,0" />
+                        </StackPanel>
+                    </telerik:RadButton.Content>
+                    <ToolTipService.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Anasayfa"/>
+                        </ToolTip>
+                    </ToolTipService.ToolTip>
+                </telerik:RadButton>
+            </StackPanel>
+        
+            <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}" Margin="0,0,0,0" Grid.Row="1">
+                <StackPanel x:Name="ContentStackPanel"  >
+
+                    <telerikx:ReportViewer x:Name="ReportViewer1" HorizontalAlignment="Center"
+                                  ReportServiceUri="../RaporServisi.svc"
+                                  Report="MySisRapor.Report1,MySisRapor" />
+
+                </StackPanel>
+            </ScrollViewer>
+        
+    </Grid>
+
+</navigation:Page>

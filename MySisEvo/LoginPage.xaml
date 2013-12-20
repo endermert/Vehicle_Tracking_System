@@ -1,0 +1,86 @@
+<UserControl
+    x:Class="MySisEvo.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+    xmlns:controls="clr-namespace:MySisEvo.Controls" 
+    xmlns:toolKitControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
+    d:DesignWidth="640" d:DesignHeight="300" HorizontalAlignment="Center" Loaded="UserControl_Loaded" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
+
+    <Grid HorizontalAlignment="Center">
+
+      <controls:TiledBackground SourceUri="/MySisEvo;component/Images/backgroundtexture.png" />
+      <Image Source="/MySisEvo;component/Images/backgroundshadow.png" Stretch="Fill" />
+
+      <Border x:Name="BackgroundBorder" Style="{StaticResource BackgroundBorderStyle}" />
+
+      <Border x:Name="LinksBorder" Style="{StaticResource NavLinksBorderStyle}" />
+
+      <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}" HorizontalAlignment="Left" Margin="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+            
+        <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+                <HyperlinkButton Name="LoginLink" Style="{StaticResource LinkStyle}" NavigateUri="Home" TargetName="ContentFrame" Content="Login" />
+                <HyperlinkButton Name="MapLink" Style="{StaticResource LinkStyle}" NavigateUri="MapPage" TargetName="ContentFrame" Content="Harita" />
+                <HyperlinkButton Name="DiagnostikLink" Style="{StaticResource LinkStyle}" NavigateUri="DiagnostikPage" TargetName="ContentFrame" Content="Diagnostik" />
+                <HyperlinkButton Name="RaporPageLink" Style="{StaticResource LinkStyle}" NavigateUri="RaporPage" TargetName="ContentFrame" Content="Rapor" />
+                <HyperlinkButton Name="HakkindaLink" Style="{StaticResource LinkStyle}" NavigateUri="About" TargetName="ContentFrame" Content="Hakkinda" />
+                <HyperlinkButton Name="TanimLink" Style="{StaticResource LinkStyle}" NavigateUri="TanimPage" TargetName="ContentFrame" Content="Tanimlar" />
+            </StackPanel>
+
+        <Border x:Name="BrandingBorder" Margin="0,-30,0,0" Style="{StaticResource NavBrandingBorderStyle}" Grid.Row="1" HorizontalAlignment="Left">
+          <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource NavBrandingStackPanelStyle}">
+                    <TextBlock x:Name="ApplicationNameTextBlock" Style="{StaticResource ApplicationNameStyle}" Text="MySisMoBil" />
+              <ContentControl Style="{StaticResource NavLogoIcon}" VerticalAlignment="Bottom" />
+          </StackPanel>
+        </Border>
+
+        <Border x:Name="ContentBorder" Style="{StaticResource NavContentBorderStyle}" Grid.Row="2">
+          <navigation:Frame x:Name="ContentFrame" Margin="0,-35,0,0" Style="{StaticResource NavContentFrameStyle}" Navigated="ContentFrame_Navigated" NavigationFailed="ContentFrame_NavigationFailed" />
+        </Border>
+        </Grid>
+        <toolKitControls:BusyIndicator Name="loginBusy" Background="Transparent" BusyContent="Lutfen Bekleyin.." IsBusy="False"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,150,0,0" Visibility="Collapsed" />
+        <Grid x:Name="LayoutRoot2" HorizontalAlignment="Center" >
+                <StackPanel x:Name="ContentStackPanel" HorizontalAlignment="Center" Margin="0,150,0,0">
+
+                <Grid Height="283" Name="grid1" Width="553" Margin="0,100,0,0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/MySisEvo;component/Images/loginfrm.png" Stretch="None" />
+                        </Grid.Background>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="102*" />
+                            <ColumnDefinition Width="35*" />
+                            <ColumnDefinition Width="164*" />
+                            <ColumnDefinition Width="104*" />
+                            <ColumnDefinition Width="148*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="68*" />
+                            <RowDefinition Height="57*" />
+                            <RowDefinition Height="32*" />
+                            <RowDefinition Height="24*" />
+                            <RowDefinition Height="102*" />
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Column="2" Height="26" HorizontalAlignment="Left" Margin="3,3,0,0" Name="textBox1" 
+                                 VerticalAlignment="Top" Width="217" Grid.Row="1" Grid.ColumnSpan="2" />
+                        <PasswordBox Grid.Column="2" Grid.Row="2" Height="26" HorizontalAlignment="Left"  
+                                     Margin="3,4,0,0" Name="passwordBox1" VerticalAlignment="Top" Width="217" Grid.ColumnSpan="2" />
+                        <HyperlinkButton Content="LOGIN" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Height="23" HorizontalAlignment="Left" Margin="12,7,0,0" Name="hyperlinkButton1" 
+                                     VerticalAlignment="Top" Width="100" FontSize="15" Click="hyperlinkButton1_Click" />
+                   
+                    <TextBlock Name="kulTxt"  Grid.Row="5" Grid.Column="2" Height="23" HorizontalAlignment="Left" Margin="-30,55,0,0" Text="" VerticalAlignment="Top" />
+                    </Grid>
+                </StackPanel>
+
+          
+        </Grid>
+        
+    </Grid>
+</UserControl>

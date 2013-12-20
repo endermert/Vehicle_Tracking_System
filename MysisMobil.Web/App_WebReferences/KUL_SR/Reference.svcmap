@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="961a5682-545a-4de8-838b-705a9a6176ae" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2564/KullaniciServis.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="KullaniciServis.xsd" MetadataType="Schema" ID="c043ef00-f0f7-4abc-901b-c3853350fbf6" SourceId="1" SourceUrl="http://localhost:2564/KullaniciServis.svc?xsd=xsd1" />
+    <MetadataFile FileName="KullaniciServis.wsdl" MetadataType="Wsdl" ID="d506b7da-5e11-49c0-877a-6775d43d3e3c" SourceId="1" SourceUrl="http://localhost:2564/KullaniciServis.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="KullaniciServis2.wsdl" MetadataType="Wsdl" ID="f513276d-e318-472c-afc2-95fed2a322a6" SourceId="1" SourceUrl="http://localhost:2564/KullaniciServis.svc?wsdl" />
+    <MetadataFile FileName="KullaniciServis.disco" MetadataType="Disco" ID="a282c4eb-69b7-4d8c-952f-330d729a2f8d" SourceId="1" SourceUrl="http://localhost:2564/KullaniciServis.svc?disco" />
+    <MetadataFile FileName="KullaniciServis2.xsd" MetadataType="Schema" ID="4ed00ece-5ac2-468c-b652-4cad3d712879" SourceId="1" SourceUrl="http://localhost:2564/KullaniciServis.svc?xsd=xsd2" />
+    <MetadataFile FileName="KullaniciServis3.xsd" MetadataType="Schema" ID="9252c466-ec5f-47dc-a297-c366e2790525" SourceId="1" SourceUrl="http://localhost:2564/KullaniciServis.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

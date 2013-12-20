@@ -1,0 +1,133 @@
+<telerik:RadWindow x:Class="MySisEvo.Views.ArcSec"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:data="clr-namespace:MySisEvo.Classes"
+    mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="888" Header="Arac Sec" Loaded="RadWindow_Loaded" Background="AliceBlue" ResizeMode="NoResize">
+    
+    <telerik:RadWindow.Resources>
+        <LinearGradientBrush x:Key="CoverFlowItemBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFd1d1d1" Offset="0" />
+                    <GradientStop Color="#FFd1d1d1" Offset="0.02" />
+                    <GradientStop Color="#FF7a7a7a" Offset="0.24" />
+                    <GradientStop Color="#FF999999" Offset="0.53" />
+                    <GradientStop Color="#FFBABABA" Offset="0.98" />
+                    <GradientStop Color="#FFbbbbbb" Offset="0.99" />
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="CoverFlowItemBorderBrush"  EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#CCE0E0E0"/>
+            <GradientStop Color="#CCDEDEDE" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="RadCoverFlowItemContainerStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="telerik:RadCoverFlowItem">
+                        <Border Background="{StaticResource CoverFlowItemBackground}" BorderBrush="{StaticResource CoverFlowItemBorderBrush}" 
+									BorderThickness="1"  CornerRadius="3" telerik:RadCoverFlow.EnableLoadNotification="True">
+                            <Image Source="{Binding Path=ARC_RES1M}" Stretch="Uniform" Width="316" Height="223" Margin="9" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </telerik:RadWindow.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="360*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="2,2,0,2">
+            <telerik:RadButton Name="btnHSec" Margin="2" Height="35" Width="110" Click="btnHSec_Click">
+                <telerik:RadButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/MySisEvo;component/Images/pin_blue.png" Height="30" Width="30" />
+                        <TextBlock Text="HEPSiNi SEC" Foreground="Navy" Margin="5,7,0,0" />
+                    </StackPanel>
+                </telerik:RadButton.Content>
+            </telerik:RadButton>
+            <telerik:RadButton Name="btnHTem" Margin="2" Height="35" Width="90" Click="btnHTem_Click">
+                <telerik:RadButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/MySisEvo;component/Images/arrow_undo.png" Height="30" Width="30" />
+                        <TextBlock Text="TEMiZLE" Foreground="Navy" Margin="5,7,0,0" />
+                    </StackPanel>
+                </telerik:RadButton.Content>
+            </telerik:RadButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="2,2,0,2" Grid.Column="1" Grid.Row="0">
+            
+                <StackPanel Orientation="Horizontal" Background="White" Height="35">
+                    <TextBlock Text="MARKA : " Foreground="Navy" Margin="5,7,0,0"/>
+                    <TextBlock Name="txtmarka" Width="100" Foreground="Navy" Margin="5,7,0,0"/>
+                    <TextBlock Text="MODEL : " Foreground="Navy" Margin="5,7,0,0"/>
+                    <TextBlock Name="txtModel" Width="100" Foreground="Navy" Margin="5,7,0,0"/>
+                    <TextBlock Text="SAHiBi : " Foreground="Navy" Margin="5,7,0,0"/>
+                    <TextBlock Name="txtSahibi" Width="150" Foreground="Navy" Margin="5,7,0,0"/>
+                </StackPanel>
+            
+            <telerik:RadButton Name="btnOKSec" Margin="2" Height="35" Width="90" Click="btnOKSec_Click">
+                <telerik:RadButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/MySisEvo;component/Images/accept.png" Height="30" Width="30" />
+                        <TextBlock Text="TAMAM" Foreground="Navy" Margin="5,7,0,0" />
+                    </StackPanel>
+                </telerik:RadButton.Content>
+            </telerik:RadButton>
+        </StackPanel>
+        <ListBox Grid.Row="1" HorizontalAlignment="Left" Name="ArcSeclistBox1"  
+                                                 VerticalAlignment="Top" Margin="2,2,0,0" 
+                                                 MinWidth="145" SelectionChanged="ArcSeclistBox1_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="195">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="25" />
+                            <!--<ColumnDefinition Width="25" />-->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
+                        <Image Grid.Column="0" Source="/MySisEvo;component/Images/plaka30.png" Height="30">
+                           
+                        </Image>
+                        <TextBlock Grid.Column="0" Margin="25,5,0,0" Text="{Binding Path=Arac.ARC_PLAKA}"  FontSize="15" FontFamily="Arial Black" Foreground="Navy"></TextBlock>
+                        
+                        <!--<Image Visibility="Collapsed" Grid.Column="1" Source="/MySisEvo;component/Images/info.png" Height="25" Width="25"  Tag="{Binding Path=ARC_SERINO}">    
+                        </Image>
+                        <Image Grid.Column="2" Source="/MySisEvo;component/Images/pin_green.png"  Height="25" Width="25"  Tag="{Binding Path=ARC_SERINO}"></Image>
+                        -->
+                        <Image Grid.Column="1" Source="/MySisEvo;component/Images/keyg.png"  Height="25" Width="25" ></Image>
+                        <Image Visibility="{Binding Path=Arac.ARC_KONTAK}" Grid.Column="1" Source="/MySisEvo;component/Images/keyn.png"  Height="25" Width="25" ></Image>
+                        <CheckBox Margin="5" Grid.Column="2" Tag="{Binding Path=Arac.ARC_SERINO}" Checked="ArcSec_Checked" Unchecked="ArcSec_Checked" IsChecked="{Binding Path=Secili}" />
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+         
+            <telerik:RadCoverFlow x:Name="coverFlow" OffsetY="100" Grid.Column="1" Grid.Row="1"
+									CameraViewpoint="Center" ItemScale="0.5" RotationY="60" ReflectionHeight="0.2" ReflectionOpacity="2"
+									DistanceBetweenItems="35" DistanceFromSelectedItem="-30" IsVirtualizing="True" Margin="30,0,15,0"
+									ItemContainerStyle="{StaticResource RadCoverFlowItemContainerStyle}" SelectionChanged="coverFlow_SelectionChanged">
+            </telerik:RadCoverFlow>
+
+    </Grid>
+</telerik:RadWindow>

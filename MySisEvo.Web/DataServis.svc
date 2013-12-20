@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MySisEvo.Web.DataServis" CodeBehind="DataServis.svc.cs" %>

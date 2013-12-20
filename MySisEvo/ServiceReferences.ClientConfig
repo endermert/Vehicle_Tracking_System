@@ -1,0 +1,33 @@
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="FileUploadServisSoap" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+            <customBinding>
+                <binding name="CustomBinding_DataServis">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+                <binding name="CustomBinding_DataServis1">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+            </customBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://aracts.azurewebsites.net/FileUploadServis.asmx"
+                binding="basicHttpBinding" bindingConfiguration="FileUploadServisSoap"
+                contract="FUP_SR.FileUploadServisSoap" name="FileUploadServisSoap" />
+            <endpoint address="http://aracts.azurewebsites.net/DataServis.svc" binding="customBinding"
+                bindingConfiguration="CustomBinding_DataServis" contract="DATA_SR.DataServis"
+                name="CustomBinding_DataServis" />
+            <endpoint address="http://aracts.azurewebsites.net/DataServis.svc" binding="customBinding"
+                bindingConfiguration="CustomBinding_DataServis1" contract="ServiceReference.MySisEvo.Web.DataServis.DataServis"
+                name="CustomBinding_DataServis1" />
+        </client>
+    </system.serviceModel>
+</configuration>

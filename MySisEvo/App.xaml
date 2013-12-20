@@ -1,0 +1,29 @@
+<Application
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+  x:Class="MySisEvo.App"
+  mc:Ignorable="d">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Brushes.xaml"/>
+                <ResourceDictionary Source="Assets/Fonts.xaml"/>
+                <ResourceDictionary Source="Assets/CoreStyles.xaml"/>
+                <ResourceDictionary Source="Assets/Styles.xaml"/>
+                <ResourceDictionary Source="Assets/SdkStyles.xaml"/>
+                <!--<ResourceDictionary Source="Assets/ToolkitStyles.xaml"/>
+                To extend this theme to include the toolkit controls:
+                1. Install the Silverlight Toolkit for Silverlight 4
+                2. Add a Toolkit control to your project from the toolbox. This will add references to toolkit assemblies.
+                3. Change the "Build Action" for ToolkitStyles.xaml to "Page"
+                4. Uncomment the resource dictionary include above.
+                
+                If you do not intend to use toolkit controls, delete this comment and the ToolkitStyles.xaml file.-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

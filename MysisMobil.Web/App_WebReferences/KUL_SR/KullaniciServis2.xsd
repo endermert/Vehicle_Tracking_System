@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MySisEvo.Web.Classes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Kullanici">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deneme" type="xs:int" />
+      <xs:element minOccurs="0" name="FRM_1D" type="xs:int" />
+      <xs:element minOccurs="0" name="KUL_AD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KUL_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="KUL_SIFRE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Kullanici" nillable="true" type="tns:Kullanici" />
+</xs:schema>
